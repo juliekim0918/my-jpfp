@@ -10,10 +10,15 @@ module.exports = {
       colors: {
         transparent: "transparent",
         "light-grey": "#FAFAFA",
+        "dark-lava": "#4B4237",
+        gold: "#D5A021",
+        eggshell: "#EDE7D9",
+        "spanish-gray": "#A49694",
+        "dim-gray": "#736B60",
       },
       fontFamily: {
-        sans: ["Readex Pro", ...defaultTheme.fontFamily.sans],
-        serif: ["Readex Pro", ...defaultTheme.fontFamily.serif],
+        sans: ["Karla", ...defaultTheme.fontFamily.sans],
+        serif: ["ivypresto-display", ...defaultTheme.fontFamily.serif],
       },
     },
     container: {
