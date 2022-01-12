@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import StudentList from "./StudentList";
 import CampusList from "./CampusList";
 import { Switch, Route } from "react-router-dom";
+import SingleCampus from "./SingleCampus";
+import SingleStudent from "./SingleStudent";
 
 const Listview = () => {
   return (
@@ -20,7 +22,11 @@ const Listview = () => {
           />
           <Route
             path="/students/:studentId"
-            render={(props) => <CampusList {...props} />}
+            render={(props) => <SingleStudent {...props} />}
+          ></Route>
+          <Route
+            path="/campuses/:campusId"
+            render={(props) => <SingleCampus {...props} />}
           ></Route>
         </Switch>
       </div>

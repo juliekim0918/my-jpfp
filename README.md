@@ -74,10 +74,10 @@ You can determine views and functionality from the requirements and wireframes s
 - [ ] Clicking on a campus from the campuses view should navigate to show that campus
 
 - Write a component to display a single student with the following information:
-  - [ ] The student's full name, email, image, and gpa
+  - [ X ] The student's full name, email, image, and gpa
   - [ ] The name of their campus (or a helpful message if they don't have one)
-- [ ] Display the appropriate student when the url matches `/students/:studentId`
-- [ ] Clicking on a student from the students view should navigate to show that student
+- [ X ] Display the appropriate student when the url matches `/students/:studentId`
+- [ X ] Clicking on a student from the students view should navigate to show that student
 
 - [ ] Clicking on the name of a student in the campus view should navigate to show that student in the student view
 - [ ] Clicking on the name of a campus in the student view should navigate to show that campus in the campus view
