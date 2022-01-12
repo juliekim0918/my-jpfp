@@ -4,6 +4,7 @@ import { MoreVertical } from "react-feather";
 import { connect } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { deleteStudent } from "../store/students";
+import includes from "lodash/includes";
 
 const SeeMoreMenu = (props) => {
   const { path, url } = useRouteMatch();
@@ -27,7 +28,11 @@ const SeeMoreMenu = (props) => {
           <Menu.Item>
             {({ active }) => (
               <Link
-                to={`${path}/${id}`}
+                to={
+                  includes(path, ":campusId")
+                    ? `/students/${id}`
+                    : `${path}/${id}`
+                }
                 className={`${
                   active ? "bg-dark-lava text-white" : "text-gold"
                 } group flex rounded-md items-center w-full px-2 py-2 text-md`}

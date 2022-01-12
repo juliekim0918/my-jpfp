@@ -1,7 +1,7 @@
 const Student = require("./Student.js");
 const Campus = require("./Campus.js");
 const db = require("./db.js");
-const _ = require("lodash");
+const random = require("lodash/random");
 
 const students = [
   {
@@ -261,8 +261,10 @@ const seed = async () => {
     });
 
     await Promise.all(
-      studentArr.map((student) =>
-        student.update({ campusId: _.random(1, universities.length) })
+      studentArr.map((student, idx) =>
+        idx % 5 !== 0
+          ? student.update({ campusId: random(1, universities.length) })
+          : ""
       )
     );
   } catch (error) {

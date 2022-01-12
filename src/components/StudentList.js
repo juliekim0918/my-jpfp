@@ -1,18 +1,20 @@
-import React, { Component, useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchStudents } from "../store/students";
+import React from "react";
+import { useRouteMatch } from "react-router-dom";
 import SeeMoreMenu from "./SeeMoreMenu";
+import includes from "lodash/includes";
 
 const StudentList = (props) => {
-  const { fetchStudents, students } = props;
-  useEffect(() => {
-    fetchStudents();
-  }, [students.length]);
+  const { students } = props;
+  const { path } = useRouteMatch();
   return (
     <div>
-      <div className="text-5xl font-serif pb-5 border-b border-dark-lava">
-        Students
-      </div>
+      {includes(path, "student") ? (
+        <div className="text-5xl font-serif pb-5 border-b border-dark-lava">
+          Students
+        </div>
+      ) : (
+        ""
+      )}
       <div className="flex flex-col gap-7 md:grid-cols-2 md:grid my-10">
         {students.map((student) => {
           return (
@@ -40,17 +42,4 @@ const StudentList = (props) => {
   );
 };
 
-const mapStateToProps = ({ students }) => {
-  return {
-    students,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchStudents: () => {
-      dispatch(fetchStudents());
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(StudentList);
+export default StudentList;

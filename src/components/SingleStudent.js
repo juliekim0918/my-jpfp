@@ -2,6 +2,7 @@ import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchSingleStudent } from "../store/currStudent";
 import EnrollmentDetails from "./EnrollmentDetails";
+import { Edit2, UserX } from "react-feather";
 
 const SingleStudent = (props) => {
   const { fetchSingleStudent, currStudent } = props;
@@ -14,10 +15,12 @@ const SingleStudent = (props) => {
       <div className="bg-eggshell p-10 flex flex-col rounded-md drop-shadow-sm justify-center items-center gap-5 h-fit">
         <img src={currStudent.avatarUrl} alt="" className="w-24 h-24" />
         <div className="flex flex-row gap-5">
-          <button className="text-xl py-2 px-4 bg-spanish-gray bg-opacity-30 rounded-md ">
+          <button className="text-xl bg-spanish-gray bg-opacity-30 inline-flex items-center px-4 py-2 rounded-md shadow-sm text-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold ">
+            <Edit2 className="-ml-1 mr-2 h-5 w-5 " aria-hidden="true" />
             Edit
           </button>
-          <button className="text-xl py-2 px-4 bg-spanish-gray bg-opacity-30 rounded-md ">
+          <button className="text-xl bg-red-400 bg-opacity-30 inline-flex items-center px-4 py-2 rounded-md shadow-sm text-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold ">
+            <UserX className="-ml-1 mr-2 h-5 w-5 " aria-hidden="true" />
             Delete
           </button>
         </div>
