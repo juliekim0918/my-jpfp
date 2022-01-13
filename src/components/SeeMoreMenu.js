@@ -1,11 +1,12 @@
-import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import { MoreVertical } from "react-feather";
-import { connect } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
+import { connect } from "react-redux";
+import { Menu, Transition } from "@headlessui/react";
+import includes from "lodash/includes";
+import { MoreVertical } from "react-feather";
+
 import { deleteStudent, updateStudent } from "../store/students";
 import { deleteCampus } from "../store/campuses";
-import includes from "lodash/includes";
 import { fetchSingleCampus } from "../store/currCampus";
 
 const SeeMoreMenu = (props) => {

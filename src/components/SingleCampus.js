@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchSingleCampus } from "../store/currCampus";
 import { Edit2, Link, Map } from "react-feather";
+import { Link as RouterLink, useRouteMatch } from "react-router-dom";
+
+import { fetchSingleCampus } from "../store/currCampus";
 import StudentList from "./StudentList";
 import SingleCampusEmptyState from "./SingleCampusEmptyState";
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 
 const SingleCampus = (props) => {
   const { currCampus, fetchSingleCampus } = props;

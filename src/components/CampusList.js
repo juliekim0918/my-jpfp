@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-import { fetchCampuses } from "../store/campuses";
-import { connect } from "react-redux";
-import SeeMoreMenu from "./SeeMoreMenu";
-import { Map, Plus } from "react-feather";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Map, Plus } from "react-feather";
+
+import SeeMoreMenu from "./SeeMoreMenu";
 
 const CampusList = (props) => {
-  const { fetchCampuses, campuses } = props;
-  useEffect(() => {
-    fetchCampuses();
-  }, [campuses.length]);
+  const { campuses } = props;
+
   return (
     <div>
       <div className="flex justify-between pb-5 border-b border-dark-lava">
@@ -44,17 +42,4 @@ const CampusList = (props) => {
   );
 };
 
-const mapStateToProps = ({ campuses }) => {
-  return {
-    campuses,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchCampuses: () => {
-      dispatch(fetchCampuses());
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(CampusList);
+export default CampusList;

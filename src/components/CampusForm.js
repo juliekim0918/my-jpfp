@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { createCampus, updateCampus } from "../store/campuses";
-import currCampus, { fetchSingleCampus } from "../store/currCampus";
+import { fetchSingleCampus } from "../store/currCampus";
 
 class CampusForm extends Component {
   constructor() {

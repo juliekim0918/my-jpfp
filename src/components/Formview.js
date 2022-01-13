@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchSingleStudent } from "../store/currStudent";
 import startCase from "lodash/startCase";
+
+import { fetchSingleStudent } from "../store/currStudent";
 import CampusForm from "./CampusForm";
 import StudentForm from "./StudentForm";
 

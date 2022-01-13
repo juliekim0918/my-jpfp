@@ -1,16 +1,16 @@
 import React from "react";
-import { useRouteMatch } from "react-router-dom";
-import SeeMoreMenu from "./SeeMoreMenu";
+import { Link, useRouteMatch } from "react-router-dom";
 import includes from "lodash/includes";
-import { Link } from "react-router-dom";
 import { Plus } from "react-feather";
+
+import SeeMoreMenu from "./SeeMoreMenu";
 
 const StudentList = (props) => {
   const { students, campusId } = props;
   const { path } = useRouteMatch();
   return (
     <div>
-      {includes(path, "student") ? (
+      {includes(path, "student") || path === "/" ? (
         <div className="flex justify-between pb-5 border-b border-dark-lava">
           <div className="text-5xl font-serif ">Students</div>
           <Link

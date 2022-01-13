@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { fetchCampuses } from "../store/campuses";
 import { createStudent, updateStudent } from "../store/students";
 import { fetchSingleStudent } from "../store/currStudent";
@@ -57,8 +58,8 @@ class StudentForm extends Component {
 
   componentDidMount() {
     this.props.fetchCampuses();
-    this.props.fetchSingleStudent(this.props.match.params.studentId * 1);
     if (this.props.operation === "create") this.resetState();
+    else this.props.fetchSingleStudent(this.props.match.params.studentId * 1);
   }
   componentDidUpdate(prevProps, prevState) {
     if (
