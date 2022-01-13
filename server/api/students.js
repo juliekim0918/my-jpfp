@@ -13,7 +13,6 @@ app.get("/", async (req, res, next) => {
 
 app.post("/", async (req, res, next) => {
   try {
-    console.log(req.body, "THIS IS REQ BODY");
     const newStudent = await Student.create(req.body);
     res.send(newStudent);
   } catch (error) {

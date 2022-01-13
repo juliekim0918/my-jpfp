@@ -25,7 +25,9 @@ const EnrollmentDetails = (props) => {
         <Map />
         {currStudent.campus.address}
       </div>
-      <div className="font-sans text-lg">{currStudent.campus.description}</div>
+      <div className="font-sans text-lg whitespace-pre-line	">
+        {currStudent.campus.description}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import axios from "axios";
 import toNumber from "lodash/toNumber";
+import { fetchSingleCampus } from "./currCampus";
+import { fetchSingleStudent } from "./currStudent";
 
 const FETCH_STUDENTS = "FETCH_STUDENTS";
 
@@ -24,10 +26,18 @@ export const deleteStudent = (id) => {
   };
 };
 
-export const updateStudent = (id, student) => {
+export const updateStudent = (id, updatedInfo, history, campusId) => {
   return async (dispatch) => {
-    await axios.put(`/api/students/${id}`, student);
-    dispatch(fetchStudents());
+    const { data: updatedStudent } = await axios.put(
+      `/api/students/${id}`,
+      updatedInfo
+    );
+    if (updatedStudent.campusId) {
+      dispatch(fetchSingleStudent(id));
+      history.push(`/students/${id}`);
+    } else {
+      dispatch(fetchSingleCampus(campusId));
+    }
   };
 };
 

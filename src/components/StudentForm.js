@@ -23,7 +23,6 @@ class StudentForm extends Component {
         this.props.match.params.studentId * 1,
         this.state
       );
-      this.props.history.push(`/students/${this.props.match.params.studentId}`);
     } else {
       this.props.createStudent(this.state);
       this.props.history.push("/students");
@@ -186,7 +185,7 @@ const mapStateToProps = ({ campuses, currStudent }) => {
   return { campuses, currStudent };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     fetchCampuses: () => {
       dispatch(fetchCampuses());
@@ -194,8 +193,8 @@ const mapDispatchToProps = (dispatch) => {
     createStudent: (student) => {
       dispatch(createStudent(student));
     },
-    updateStudent: (id, student) => {
-      dispatch(updateStudent(id, student));
+    updateStudent: (id, updatedInfo) => {
+      dispatch(updateStudent(id, updatedInfo, history));
     },
     fetchSingleStudent: (id) => {
       dispatch(fetchSingleStudent(id));

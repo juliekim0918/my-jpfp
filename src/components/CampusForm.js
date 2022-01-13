@@ -14,10 +14,10 @@ class CampusForm extends Component {
     };
   }
   handleSubmit = (e) => {
+    e.stopPropagation();
     e.preventDefault();
     if (this.props.operation === "edit") {
       this.props.updateCampus(this.props.match.params.campusId * 1, this.state);
-      this.props.history.push(`/campuses/${this.props.match.params.campusId}`);
     } else {
       this.props.createCampus(this.state);
       this.props.history.push("/campuses");
@@ -46,7 +46,12 @@ class CampusForm extends Component {
     });
   };
 
+  handleHitEnter = (e) => {
+    if (e.key === "Enter") e.stopPropagation();
+  };
+
   componentDidMount() {
+    document.addEventListener("keydown", this.handleHitEnter, true);
     if (!this.props.currCampus.id && this.props.operation === "edit") {
       this.props.fetchSingleCampus(this.props.match.params.campusId * 1);
     }
@@ -126,7 +131,21 @@ class CampusForm extends Component {
               className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
             />
           </div>
-
+          <div className="flex flex-col w-full">
+            <label
+              htmlFor="students"
+              className="text-lg font-bold tet-gray-700"
+            >
+              Students
+            </label>
+            <select className="form-multiselect block w-full mt-1" multiple>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+              <option>Option 5</option>
+            </select>
+          </div>
           <button
             type="submit"
             className="w-1/3 bg-gold text-white rounded-md py-3 text-xl my-3 shadow-sm font-medium"
@@ -143,13 +162,13 @@ const mapStateToProps = ({ currCampus }) => {
   return { currCampus };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     createCampus: (campus) => {
       dispatch(createCampus(campus));
     },
     updateCampus: (id, campus) => {
-      dispatch(updateCampus(id, campus));
+      dispatch(updateCampus(id, campus, history));
     },
     fetchSingleCampus: (id) => {
       dispatch(fetchSingleCampus(id));

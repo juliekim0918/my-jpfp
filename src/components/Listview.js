@@ -21,7 +21,6 @@ const Listview = (props) => {
     fetchStudents();
     fetchCampuses();
   }, [students.length, campuses.length]);
-  console.log(campuses);
 
   return (
     <div className="absolute top-[80%] md:top-2/3 left-0 right-0 w-11/12 mx-auto">

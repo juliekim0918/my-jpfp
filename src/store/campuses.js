@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchSingleCampus } from "./currCampus";
 
 const FETCH_CAMPUSES = "FETCH_CAMPUSES";
 
@@ -16,10 +17,11 @@ export const fetchCampuses = () => {
   };
 };
 
-export const updateCampus = (id, campus) => {
+export const updateCampus = (id, campus, history) => {
   return async (dispatch) => {
     await axios.put(`/api/campuses/${id}`, campus);
-    dispatch(fetchCampuses());
+    dispatch(fetchSingleCampus(id));
+    history.push(`/campuses/${id}`);
   };
 };
 

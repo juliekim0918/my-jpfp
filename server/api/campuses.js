@@ -12,7 +12,6 @@ app.get("/", async (req, res, next) => {
 
 app.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
     const newCampus = await Campus.create(req.body);
     res.send(newCampus);
   } catch (error) {

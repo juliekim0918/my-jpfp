@@ -7,18 +7,11 @@ import { MoreVertical } from "react-feather";
 
 import { deleteStudent, updateStudent } from "../store/students";
 import { deleteCampus } from "../store/campuses";
-import { fetchSingleCampus } from "../store/currCampus";
 
 const SeeMoreMenu = (props) => {
   const { path } = useRouteMatch();
-  const {
-    campusId,
-    studentId,
-    deleteStudent,
-    deleteCampus,
-    updateStudent,
-    fetchSingleCampus,
-  } = props;
+  const { campusId, studentId, deleteStudent, deleteCampus, updateStudent } =
+    props;
   return (
     <Menu className="absolute right-5 top-5 z-50" as="div">
       <Menu.Button>
@@ -78,9 +71,7 @@ const SeeMoreMenu = (props) => {
                   !includes(path, ":campusId") ? "hidden" : ""
                 } group flex rounded-md items-center w-full px-2 py-2 text-md`}
                 onClick={() => {
-                  updateStudent(studentId, { campusId: null });
-                  console.log(campusId, "this is campusId");
-                  fetchSingleCampus(campusId);
+                  updateStudent(studentId, { campusId: null }, campusId);
                 }}
               >
                 Unenroll
@@ -101,11 +92,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteCampus: (id) => {
       dispatch(deleteCampus(id));
     },
-    updateStudent: (id, student) => {
-      dispatch(updateStudent(id, student));
-    },
-    fetchSingleCampus: (id) => {
-      dispatch(fetchSingleCampus(id));
+    updateStudent: (id, updatedInfo, campusId) => {
+      dispatch(updateStudent(id, updatedInfo, null, campusId));
     },
   };
 };
