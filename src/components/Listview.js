@@ -24,8 +24,8 @@ const Listview = (props) => {
   console.log(campuses);
 
   return (
-    <div className="absolute top-2/3 left-0 right-0 w-11/12 mx-auto">
-      <div className="p-16 rounded-lg max-w-screen-2xl mx-auto drop-shadow-lg bg-white z-0 mb-10">
+    <div className="absolute top-[80%] md:top-2/3 left-0 right-0 w-11/12 mx-auto">
+      <div className="p-5 md:p-16 rounded-lg max-w-screen-2xl mx-auto drop-shadow-lg bg-white z-0 mb-10">
         <Switch>
           <Route
             path="/"
