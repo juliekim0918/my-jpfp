@@ -23,6 +23,13 @@ export const updateCampus = (id, campus) => {
   };
 };
 
+export const deleteCampus = (id) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/campuses/${id}`);
+    dispatch(fetchCampuses());
+  };
+};
+
 export const createCampus = ({ name, address, description }) => {
   return async (dispatch) => {
     await axios.post("/api/campuses", {

@@ -32,6 +32,16 @@ app.get("/:id", async (req, res, next) => {
   }
 });
 
+app.delete("/:id", async (req, res, next) => {
+  try {
+    const campus = await Campus.findByPk(req.params.id);
+    await campus.destroy();
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.put("/:id", async (req, res, next) => {
   try {
     const campus = await Campus.findOne({ where: { id: req.params.id } });

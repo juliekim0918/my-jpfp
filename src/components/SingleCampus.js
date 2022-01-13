@@ -63,7 +63,10 @@ const SingleCampus = (props) => {
           </div>
 
           {currCampus.students && currCampus.students.length ? (
-            <StudentList students={currCampus.students} />
+            <StudentList
+              students={currCampus.students}
+              campusId={currCampus.id}
+            />
           ) : (
             <SingleCampusEmptyState />
           )}

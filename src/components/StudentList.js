@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Plus } from "react-feather";
 
 const StudentList = (props) => {
-  const { students } = props;
+  const { students, campusId } = props;
   const { path } = useRouteMatch();
   return (
     <div>
@@ -31,7 +31,7 @@ const StudentList = (props) => {
               key={student.id}
               className="rounded-lg drop-shadow-md p-10 z-0 bg-white relative"
             >
-              <SeeMoreMenu id={student.id} />
+              <SeeMoreMenu studentId={student.id} campusId={campusId} />
               <div className="flex flex-row gap-5">
                 <img src={student.avatarUrl} alt="" className="h-16 w-16" />
                 <div className="flex flex-col">

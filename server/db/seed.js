@@ -262,7 +262,7 @@ const seed = async () => {
 
     await Promise.all(
       studentArr.map((student, idx) =>
-        idx % 5 !== 0
+        idx % 9 !== 0
           ? student.update({ campusId: random(1, universities.length) })
           : ""
       )

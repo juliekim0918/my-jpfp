@@ -30,7 +30,7 @@ const CampusList = (props) => {
               style={{ backgroundImage: `url(${campus.image})` }}
             ></div>
             <div className="flex flex-col relative p-10 gap-2">
-              <SeeMoreMenu id={campus.id} />
+              <SeeMoreMenu campusId={campus.id} />
               <div className="text-3xl font-serif">{campus.name}</div>
               <div className="font-sans text-lg text-gray-400 flex flex-row gap-2">
                 <Map />
