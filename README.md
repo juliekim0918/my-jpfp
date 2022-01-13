@@ -69,35 +69,35 @@ You can determine views and functionality from the requirements and wireframes s
 
 - Write a component to display a single campus with the following information:
   - [ X ] The campus's name, image, address and description
-  - [ ] A list of the names of all students in that campus (or a helpful message if it doesn't have any students)
+  - [ X ] A list of the names of all students in that campus (or a helpful message if it doesn't have any students)
 - [ X ] Display the appropriate campus's info when the url matches `/campuses/:campusId`
 - [ X ] Clicking on a campus from the campuses view should navigate to show that campus
 
 - Write a component to display a single student with the following information:
   - [ X ] The student's full name, email, image, and gpa
-  - [ ] The name of their campus (or a helpful message if they don't have one)
+  - [ X ] The name of their campus (or a helpful message if they don't have one)
 - [ X ] Display the appropriate student when the url matches `/students/:studentId`
 - [ X ] Clicking on a student from the students view should navigate to show that student
 
-- [ ] Clicking on the name of a student in the campus view should navigate to show that student in the student view
-- [ ] Clicking on the name of a campus in the student view should navigate to show that campus in the campus view
+- [ X ] Clicking on the name of a student in the campus view should navigate to show that student in the student view
+- [ X ] Clicking on the name of a campus in the student view should navigate to show that campus in the campus view
 
 ### Tier 3: Adding a Campus and Adding a Student (10/61)
 
 #### Frontend
 
-- [ ] Write a component to display a form for adding a new campus that contains inputs for _at least_ the name and address.
-- [ ] Display this component as part of the campuses view, alongside the list of campuses
+- [ X ] Write a component to display a form for adding a new campus that contains inputs for _at least_ the name and address.
+- [ X ] Display this component as part of the campuses view, alongside the list of campuses
 - Submitting the form with a valid name/address should:
 
-  - [ ] Make an AJAX request that causes the new campus to be persisted in the database
-  - [ ] Add the new campus to the list of campuses without needing to refresh the page
+  - [ X ] Make an AJAX request that causes the new campus to be persisted in the database
+  - [ X ] Add the new campus to the list of campuses without needing to refresh the page
 
-- [ ] Write a component to display a form for adding a new student that contains inputs for _at least_ first name, last name and email
-- [ ] Display this component as part of the students view, alongside the list of students
+- [ X ] Write a component to display a form for adding a new student that contains inputs for _at least_ first name, last name and email
+- [ X ] Display this component as part of the students view, alongside the list of students
 - Submitting the form with a valid first name/last name/email should:
-  - [ ] Make an AJAX request that causes the new student to be persisted in the database
-  - [ ] Add the new student to the list of students without needing to refresh the page
+  - [ X ] Make an AJAX request that causes the new student to be persisted in the database
+  - [ X ] Add the new student to the list of students without needing to refresh the page
 
 ### Tier 4: Removing a Campus and Removing a Student (8/61)
 
@@ -109,10 +109,10 @@ You can determine views and functionality from the requirements and wireframes s
   - [ ] Make an AJAX request that causes that campus to be removed from database
   - [ ] Remove the campus from the list of campuses without needing to refresh the page
 
-- [ ] In the students view, include an `X` button next to each student
+- [ X ] In the students view, include an `X` button next to each student
 - Clicking the `X` button should:
-  - [ ] Make an AJAX request that causes that student to be removed from database
-  - [ ] Remove the student from the list of students without needing to refresh the page
+  - [ X ] Make an AJAX request that causes that student to be removed from database
+  - [ X ] Remove the student from the list of students without needing to refresh the page
 
 ### Tier 5: Updating a Campus and Updating a Student (11/61)
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import StudentList from "./StudentList";
 import CampusList from "./CampusList";
 import { Switch, Route } from "react-router-dom";
@@ -6,6 +6,10 @@ import SingleCampus from "./SingleCampus";
 import SingleStudent from "./SingleStudent";
 import { fetchStudents } from "../store/students";
 import { connect } from "react-redux";
+import Formview from "./Formview";
+const CREATE = "CREATE";
+const STUDENT = "STUDENT";
+const CAMPUS = "CAMPUS";
 
 const Listview = (props) => {
   const { fetchStudents, students } = props;
@@ -20,6 +24,20 @@ const Listview = (props) => {
             path="/students"
             exact
             render={(props) => <StudentList {...props} students={students} />}
+          />
+          <Route
+            path="/create/student"
+            exact
+            render={(props) => (
+              <Formview operation={CREATE} entityToManipulate={STUDENT} />
+            )}
+          />
+          <Route
+            path="/create/campus"
+            exact
+            render={(props) => (
+              <Formview operation={CREATE} entityToManipulate={CAMPUS} />
+            )}
           />
           <Route
             path="/campuses"

@@ -27,6 +27,7 @@ const Student = db.define("student", {
   },
   avatarUrl: {
     type: STRING,
+    defaultValue: "/avatar_blue.png",
   },
   gpa: {
     type: DECIMAL(10, 1),

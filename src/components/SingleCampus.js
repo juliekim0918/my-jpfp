@@ -1,8 +1,9 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchSingleCampus } from "../store/currCampus";
 import { Edit2, Link, Map } from "react-feather";
 import StudentList from "./StudentList";
+import SingleCampusEmptyState from "./SingleCampusEmptyState";
 
 const SingleCampus = (props) => {
   const { currCampus, fetchSingleCampus } = props;
@@ -11,6 +12,7 @@ const SingleCampus = (props) => {
     fetchSingleCampus(id);
   }, [currCampus.id]);
 
+  console.log(currCampus.students);
   return (
     <div className="flex flex-col bg-eggshell rounded-md drop-shadow-md">
       <div
@@ -58,10 +60,10 @@ const SingleCampus = (props) => {
             Students
           </div>
 
-          {currCampus.students ? (
+          {currCampus.students && currCampus.students.length ? (
             <StudentList students={currCampus.students} />
           ) : (
-            <div className="text-3xl"> No students </div>
+            <SingleCampusEmptyState />
           )}
         </div>
       </div>

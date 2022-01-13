@@ -1,5 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { MoreVertical } from "react-feather";
 import { connect } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
@@ -7,7 +7,7 @@ import { deleteStudent } from "../store/students";
 import includes from "lodash/includes";
 
 const SeeMoreMenu = (props) => {
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
   const { id, deleteStudent } = props;
   return (
     <Menu className="absolute right-5 top-5 z-50" as="div">

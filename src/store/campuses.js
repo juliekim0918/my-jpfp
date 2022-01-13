@@ -16,6 +16,17 @@ export const fetchCampuses = () => {
   };
 };
 
+export const createCampus = ({ name, address, description }) => {
+  return async (dispatch) => {
+    await axios.post("/api/campuses", {
+      name,
+      address,
+      description,
+    });
+    dispatch(fetchCampuses());
+  };
+};
+
 export default (state = [], action) => {
   switch (action.type) {
     case FETCH_CAMPUSES:
