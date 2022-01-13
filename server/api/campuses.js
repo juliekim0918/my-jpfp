@@ -32,4 +32,14 @@ app.get("/:id", async (req, res, next) => {
   }
 });
 
+app.put("/:id", async (req, res, next) => {
+  try {
+    const campus = await Campus.findOne({ where: { id: req.params.id } });
+    await campus.update(req.body);
+    res.send(campus);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = app;

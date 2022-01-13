@@ -7,9 +7,10 @@ import SingleStudent from "./SingleStudent";
 import { fetchStudents } from "../store/students";
 import { connect } from "react-redux";
 import Formview from "./Formview";
-const CREATE = "CREATE";
-const STUDENT = "STUDENT";
-const CAMPUS = "CAMPUS";
+const CREATE = "create";
+const EDIT = "edit";
+const STUDENT = "student";
+const CAMPUS = "campus";
 
 const Listview = (props) => {
   const { fetchStudents, students } = props;
@@ -26,32 +27,60 @@ const Listview = (props) => {
             render={(props) => <StudentList {...props} students={students} />}
           />
           <Route
+            path="/campuses"
+            exact
+            render={(props) => <CampusList {...props} />}
+          />
+          <Route
             path="/create/student"
             exact
             render={(props) => (
-              <Formview operation={CREATE} entityToManipulate={STUDENT} />
+              <Formview
+                {...props}
+                operation={CREATE}
+                entityToManipulate={STUDENT}
+              />
             )}
           />
           <Route
             path="/create/campus"
             exact
             render={(props) => (
-              <Formview operation={CREATE} entityToManipulate={CAMPUS} />
+              <Formview
+                {...props}
+                operation={CREATE}
+                entityToManipulate={CAMPUS}
+              />
             )}
           />
           <Route
-            path="/campuses"
-            exact
-            render={(props) => <CampusList {...props} />}
+            path="/campuses/:campusId/edit"
+            render={(props) => (
+              <Formview
+                {...props}
+                operation={EDIT}
+                entityToManipulate={CAMPUS}
+              />
+            )}
+          />
+          <Route
+            path="/students/:studentId/edit"
+            render={(props) => (
+              <Formview
+                {...props}
+                operation={EDIT}
+                entityToManipulate={STUDENT}
+              />
+            )}
           />
           <Route
             path="/students/:studentId"
             render={(props) => <SingleStudent {...props} />}
-          ></Route>
+          />
           <Route
             path="/campuses/:campusId"
             render={(props) => <SingleCampus {...props} />}
-          ></Route>
+          />
         </Switch>
       </div>
     </div>

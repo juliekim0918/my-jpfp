@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchSingleStudent } from "../store/currStudent";
-import { createCampus } from "../store/campuses";
+import { createCampus, updateCampus } from "../store/campuses";
+import currCampus, { fetchSingleCampus } from "../store/currCampus";
 
 class CampusForm extends Component {
   constructor() {
@@ -14,8 +14,13 @@ class CampusForm extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.createCampus(this.state);
-    this.props.history.push("/campuses");
+    if (this.props.operation === "edit") {
+      this.props.updateCampus(this.props.match.params.campusId * 1, this.state);
+      this.props.history.push(`/campuses/${this.props.match.params.campusId}`);
+    } else {
+      this.props.createCampus(this.state);
+      this.props.history.push("/campuses");
+    }
   };
 
   handleChange = (e) => {
@@ -24,9 +29,45 @@ class CampusForm extends Component {
     });
   };
 
+  setEditState = () => {
+    this.setState({
+      name: this.props.currCampus.name,
+      address: this.props.currCampus.address,
+      description: this.props.currCampus.description,
+    });
+  };
+
+  resetState = () => {
+    this.setState({
+      name: "",
+      address: "",
+      description: "",
+    });
+  };
+
+  componentDidMount() {
+    if (!this.props.currCampus.id && this.props.operation === "edit") {
+      this.props.fetchSingleCampus(this.props.match.params.campusId * 1);
+    }
+    if (this.props.currCampus.id && this.props.operation === "edit")
+      this.setEditState();
+    else this.resetState();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.currCampus.id &&
+      prevProps.currCampus.id !== this.props.currCampus.id &&
+      prevState.name !== this.props.currCampus.name &&
+      this.props.operation === "edit"
+    )
+      this.setEditState();
+  }
+
   render() {
     const { name, address, description } = this.state;
     const { handleSubmit, handleChange } = this;
+    const { operation } = this.props;
     return (
       <div>
         <form
@@ -35,7 +76,7 @@ class CampusForm extends Component {
           className="flex flex-col gap-3 max-w-2xl"
         >
           <div className="flex justify-between gap-10">
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col w-full">
               <label
                 htmlFor="name"
                 className="block text-lg font-bold text-gray-700"
@@ -89,7 +130,7 @@ class CampusForm extends Component {
             type="submit"
             className="w-1/3 bg-gold text-white rounded-md py-3 text-xl my-3 shadow-sm font-medium"
           >
-            Create
+            {operation === "edit" ? "Save" : "Create"}
           </button>
         </form>
       </div>
@@ -97,14 +138,20 @@ class CampusForm extends Component {
   }
 }
 
-const mapStateToProps = ({ currStudent }) => {
-  return { currStudent };
+const mapStateToProps = ({ currCampus }) => {
+  return { currCampus };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     createCampus: (campus) => {
       dispatch(createCampus(campus));
+    },
+    updateCampus: (id, campus) => {
+      dispatch(updateCampus(id, campus));
+    },
+    fetchSingleCampus: (id) => {
+      dispatch(fetchSingleCampus(id));
     },
   };
 };

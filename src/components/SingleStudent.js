@@ -4,9 +4,11 @@ import { fetchSingleStudent } from "../store/currStudent";
 import EnrollmentDetails from "./EnrollmentDetails";
 import SingleStudentEmptyState from "./SingleStudentEmptyState";
 import { Edit2, UserX } from "react-feather";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const SingleStudent = (props) => {
   const { fetchSingleStudent, currStudent } = props;
+  const { url } = useRouteMatch();
   const id = props.match.params.studentId;
   useEffect(() => {
     fetchSingleStudent(id);
@@ -17,10 +19,13 @@ const SingleStudent = (props) => {
       <div className="bg-eggshell p-10 flex flex-col rounded-md drop-shadow-sm justify-center items-center gap-5 h-fit">
         <img src={currStudent.avatarUrl} alt="" className="w-24 h-24" />
         <div className="flex flex-row gap-5">
-          <button className="text-md bg-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold ">
+          <Link
+            to={`${url}/edit`}
+            className="text-md bg-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold "
+          >
             <Edit2 className="-ml-1 mr-2 h-5 w-5 " aria-hidden="true" />
             Edit
-          </button>
+          </Link>
           <button className="text-md bg-red-400 bg-opacity-30 inline-flex items-center px-4 py-2 rounded-md shadow-sm text-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold ">
             <UserX className="-ml-1 mr-2 h-5 w-5 " aria-hidden="true" />
             Delete
@@ -43,7 +48,7 @@ const SingleStudent = (props) => {
           {currStudent.campusId ? (
             <EnrollmentDetails />
           ) : (
-            <SingleStudentEmptyState />
+            <SingleStudentEmptyState url={url} />
           )}
         </div>
       </div>

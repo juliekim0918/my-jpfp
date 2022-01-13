@@ -33,6 +33,18 @@ app.get("/:id", async (req, res, next) => {
   }
 });
 
+app.put("/:id", async (req, res, next) => {
+  try {
+    const student = await Student.findOne({
+      where: { id: req.params.id },
+    });
+    student.update(req.body);
+    res.send(student);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.delete("/:id", async (req, res, next) => {
   try {
     const student = await Student.findByPk(req.params.id);

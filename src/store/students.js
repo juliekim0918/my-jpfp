@@ -24,6 +24,13 @@ export const deleteStudent = (id) => {
   };
 };
 
+export const updateStudent = (id, student) => {
+  return async (dispatch) => {
+    await axios.put(`/api/students/${id}`, student);
+    dispatch(fetchStudents());
+  };
+};
+
 export const createStudent = ({
   firstName,
   lastName,

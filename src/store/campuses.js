@@ -16,6 +16,13 @@ export const fetchCampuses = () => {
   };
 };
 
+export const updateCampus = (id, campus) => {
+  return async (dispatch) => {
+    await axios.put(`/api/campuses/${id}`, campus);
+    dispatch(fetchCampuses());
+  };
+};
+
 export const createCampus = ({ name, address, description }) => {
   return async (dispatch) => {
     await axios.post("/api/campuses", {
