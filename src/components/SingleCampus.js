@@ -18,15 +18,15 @@ const SingleCampus = (props) => {
   return (
     <div className="flex flex-col bg-eggshell rounded-md drop-shadow-md">
       <div
-        className="h-96 bg-cover rounded-md bg-center relative from-slate-600"
+        className="h-[80vh] md:h-96 bg-cover rounded-md bg-center relative from-slate-600"
         style={{
           backgroundImage: `linear-gradient( rgba(255, 255, 255, 0),rgba(0,0,0, 0.7)), url(${currCampus.image})`,
         }}
       >
-        <div className="absolute text-5xl bottom-10 left-10 text-white font-serif w-2/3">
+        <div className="absolute text-5xl bottom-28 md:bottom-10 left-10 text-white font-serif w-2/3">
           {currCampus.name}
         </div>
-        <div className="flex gap-3 absolute bottom-10 right-10">
+        <div className="flex gap-3 absolute bottom-10 left-10 md:left-auto md:right-10">
           <RouterLink
             to={`${url}/edit`}
             type="button"
