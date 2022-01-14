@@ -36,11 +36,7 @@ class CampusForm extends Component {
         acc.push({ path: err.path, message: err.message });
         return acc;
       }, []);
-      console.log(errors);
-
-      this.setState({
-        errors: errors,
-      });
+      this.setState({ errors });
     }
   };
 

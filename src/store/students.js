@@ -26,8 +26,10 @@ export const deleteStudent = (id) => {
   };
 };
 
-export const updateStudent = (id, updatedInfo, history, campusId) => {
+export const updateStudent = (id, updatedInfo, history, campusToUnenroll) => {
   return async (dispatch) => {
+    console.log(campusToUnenroll, "look at campusId!!!!!!");
+    console.log(history, "look at history!!!!!!");
     const { data: updatedStudent } = await axios.put(
       `/api/students/${id}`,
       updatedInfo
@@ -36,7 +38,7 @@ export const updateStudent = (id, updatedInfo, history, campusId) => {
       dispatch(fetchSingleStudent(id));
       history.push(`/students/${id}`);
     } else {
-      dispatch(fetchSingleCampus(campusId));
+      dispatch(fetchSingleCampus(campusToUnenroll));
     }
   };
 };

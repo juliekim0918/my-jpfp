@@ -15,18 +15,28 @@ class StudentForm extends Component {
       email: "",
       gpa: 3.9,
       campusId: 0,
+      errors: [],
     };
   }
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    if (this.props.operation === "edit") {
-      this.props.updateStudent(
-        this.props.match.params.studentId * 1,
-        this.state
-      );
-    } else {
-      this.props.createStudent(this.state);
-      this.props.history.push("/students");
+    try {
+      await studentSchema.validate(this.state, { abortEarly: false });
+      if (this.props.operation === "edit") {
+        this.props.updateStudent(
+          this.props.match.params.studentId * 1,
+          this.state
+        );
+      } else {
+        this.props.createStudent(this.state);
+        this.props.history.push("/students");
+      }
+    } catch (error) {
+      const errors = error.inner.reduce((acc, err) => {
+        acc.push({ path: err.path, message: err.message });
+        return acc;
+      }, []);
+      this.setState({ errors });
     }
   };
 
@@ -61,7 +71,7 @@ class StudentForm extends Component {
     if (this.props.operation === "create") this.resetState();
     else this.props.fetchSingleStudent(this.props.match.params.studentId * 1);
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevState) {
     if (
       this.props.currStudent.id &&
       prevState.firstName !== this.props.currStudent.first_name &&
@@ -73,7 +83,7 @@ class StudentForm extends Component {
 
   render() {
     const { campuses, operation } = this.props;
-    const { firstName, lastName, email, gpa, campusId } = this.state;
+    const { firstName, lastName, email, gpa, campusId, errors } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
       <div>
@@ -98,6 +108,13 @@ class StudentForm extends Component {
                 onChange={(e) => handleChange(e)}
                 className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
               />
+              {errors.find((e) => e.path === "firstName") ? (
+                <span className="text-red-700">
+                  {errors.find((e) => e.path === "firstName").message}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
             <div className="flex flex-col w-1/2">
               <label
@@ -114,6 +131,13 @@ class StudentForm extends Component {
                 onChange={(e) => handleChange(e)}
                 className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
               />
+              {errors.find((e) => e.path === "lastName") ? (
+                <span className="text-red-700">
+                  {errors.find((e) => e.path === "lastName").message}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="flex flex-col">
@@ -131,6 +155,13 @@ class StudentForm extends Component {
               onChange={(e) => handleChange(e)}
               className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
             />
+            {errors.find((e) => e.path === "email") ? (
+              <span className="text-red-700">
+                {errors.find((e) => e.path === "email").message}
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex flex-col w-1/3">
             <label
@@ -147,6 +178,13 @@ class StudentForm extends Component {
               onChange={(e) => handleChange(e)}
               className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
             />
+            {errors.find((e) => e.path === "gpa") ? (
+              <span className="text-red-700">
+                {errors.find((e) => e.path === "gpa").message}
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex flex-col w-full">
             <label
