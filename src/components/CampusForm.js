@@ -33,6 +33,7 @@ class CampusForm extends Component {
   };
 
   handleMultiselectChange = (students) => {
+    console.log(students);
     this.setState({
       selectedStudents: [...students],
     });
@@ -81,8 +82,9 @@ class CampusForm extends Component {
 
   render() {
     const { name, address, description, selectedStudents } = this.state;
-    const { handleSubmit, handleChange } = this;
-    const { operation, students } = this.props;
+    const { handleSubmit, handleChange, handleMultiselectChange } = this;
+    const { operation, students, currCampus } = this.props;
+    console.log(students);
     return (
       <div>
         <form
@@ -148,8 +150,15 @@ class CampusForm extends Component {
               Students
             </label>
             <MultiselectMenu
-              options={students}
-              handleSelectedStudents={this.handleMultiselectChange}
+              options={students
+                .filter(
+                  (student) =>
+                    !currCampus.students
+                      .map((student) => student.id)
+                      .includes(student.id)
+                )
+                .filter((student) => student.campusId === null)}
+              handleSelectedStudents={handleMultiselectChange}
               selectedStudents={selectedStudents}
             />
           </div>
