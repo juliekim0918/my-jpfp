@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { fetchCampuses } from "../store/campuses";
 import { createStudent, updateStudent } from "../store/students";
 import { fetchSingleStudent } from "../store/currStudent";
+import { studentSchema } from "../validations/StudentFormValidation";
 
 class StudentForm extends Component {
   constructor() {

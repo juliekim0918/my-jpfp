@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { createCampus, updateCampus } from "../store/campuses";
 import { fetchSingleCampus } from "../store/currCampus";
 import MultiselectMenu from "./MultiselectMenu";
+import { campusSchema } from "../validations/CampusFormValidation";
 
 class CampusForm extends Component {
   constructor() {
@@ -13,16 +14,33 @@ class CampusForm extends Component {
       address: "",
       description: "",
       selectedStudents: [],
+      errors: [],
     };
   }
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.stopPropagation();
     e.preventDefault();
-    if (this.props.operation === "edit") {
-      this.props.updateCampus(this.props.match.params.campusId * 1, this.state);
-    } else {
-      this.props.createCampus(this.state);
-      this.props.history.push("/campuses");
+    try {
+      await campusSchema.validate(this.state, { abortEarly: false });
+      if (this.props.operation === "edit") {
+        this.props.updateCampus(
+          this.props.match.params.campusId * 1,
+          this.state
+        );
+      } else {
+        this.props.createCampus(this.state);
+        this.props.history.push("/campuses");
+      }
+    } catch (error) {
+      const errors = error.inner.reduce((acc, err) => {
+        acc.push({ path: err.path, message: err.message });
+        return acc;
+      }, []);
+      console.log(errors);
+
+      this.setState({
+        errors: errors,
+      });
     }
   };
 
@@ -62,6 +80,7 @@ class CampusForm extends Component {
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleHitEnter, true);
+    console.log(this.state);
     if (!this.props.currCampus.id && this.props.operation === "edit") {
       this.props.fetchSingleCampus(this.props.match.params.campusId * 1);
     }
@@ -81,10 +100,9 @@ class CampusForm extends Component {
   }
 
   render() {
-    const { name, address, description, selectedStudents } = this.state;
+    const { name, address, description, selectedStudents, errors } = this.state;
     const { handleSubmit, handleChange, handleMultiselectChange } = this;
-    const { operation, students, currCampus } = this.props;
-    console.log(students);
+    const { operation, students } = this.props;
     return (
       <div>
         <form
@@ -108,6 +126,13 @@ class CampusForm extends Component {
                 onChange={(e) => handleChange(e)}
                 className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
               />
+              {errors.find((e) => e.path === "name") ? (
+                <span className="text-red-700">
+                  {errors.find((e) => e.path === "name").message}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="flex flex-col">
@@ -125,6 +150,13 @@ class CampusForm extends Component {
               onChange={(e) => handleChange(e)}
               className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
             />
+            {errors.find((e) => e.path === "address") ? (
+              <span className="text-red-700">
+                {errors.find((e) => e.path === "address").message}
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex flex-col w-full">
             <label
@@ -141,6 +173,13 @@ class CampusForm extends Component {
               onChange={(e) => handleChange(e)}
               className="mt-1 focus:ring-gold focus:border-gold block w-full border-gray-300 rounded-md"
             />
+            {errors.find((e) => e.path === "description") ? (
+              <span className="text-red-700">
+                {errors.find((e) => e.path === "description").message}
+              </span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex flex-col w-full">
             <label
@@ -150,14 +189,7 @@ class CampusForm extends Component {
               Students
             </label>
             <MultiselectMenu
-              options={students
-                .filter(
-                  (student) =>
-                    !currCampus.students
-                      .map((student) => student.id)
-                      .includes(student.id)
-                )
-                .filter((student) => student.campusId === null)}
+              options={students.filter((student) => student.campusId === null)}
               handleSelectedStudents={handleMultiselectChange}
               selectedStudents={selectedStudents}
             />

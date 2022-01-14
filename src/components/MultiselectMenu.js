@@ -63,8 +63,6 @@ const MultiselectMenu = ({ options, handleSelectedStudents }) => {
       styles={customStyles}
       isMulti={true}
       closeMenuOnSelect={false}
-      blurInputOnSelect={true}
-      name="students"
       onChange={(e) => {
         handleSelectedStudents(e.map((_) => _.value));
       }}
