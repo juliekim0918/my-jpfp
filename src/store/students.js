@@ -26,34 +26,39 @@ export const deleteStudent = (id) => {
   };
 };
 
-export const updateStudent = (id, updatedInfo, history, campusToUnenroll) => {
+export const updateStudent = (
+  id,
+  { firstName, lastName, email, gpa, campusId },
+  history
+) => {
+  campusId === 0 ? (campusId = null) : "";
   return async (dispatch) => {
-    console.log(campusToUnenroll, "look at campusId!!!!!!");
-    console.log(history, "look at history!!!!!!");
-    const { data: updatedStudent } = await axios.put(
-      `/api/students/${id}`,
-      updatedInfo
-    );
-    if (updatedStudent.campusId) {
-      dispatch(fetchSingleStudent(id));
-      history.push(`/students/${id}`);
-    } else {
-      dispatch(fetchSingleCampus(campusToUnenroll));
-    }
+    await axios.put(`/api/students/${id}`, {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      gpa,
+      campusId,
+    });
+    dispatch(fetchSingleStudent(id));
+    history.push(`/students/${id}`);
   };
 };
 
-export const createStudent = ({
-  firstName,
-  lastName,
-  email,
-  gpa,
-  campusId,
-  history,
-}) => {
+export const unenrollStudent = (studentId, campusId) => {
   return async (dispatch) => {
-    campusId === 0 ? (campusId = null) : "";
-    await axios.post("/api/students", {
+    await axios.put(`/api/students/${studentId}`, { campusId: null });
+    dispatch(fetchSingleCampus(campusId));
+  };
+};
+
+export const createStudent = (
+  { firstName, lastName, email, gpa, campusId },
+  history
+) => {
+  campusId === 0 ? (campusId = null) : "";
+  return async (dispatch) => {
+    const { data: newStudent } = await axios.post("/api/students", {
       first_name: firstName,
       last_name: lastName,
       email,
@@ -61,6 +66,7 @@ export const createStudent = ({
       campusId: campusId ? toNumber(campusId) : campusId,
     });
     dispatch(fetchStudents());
+    history.push(`/students/${newStudent.id}`);
   };
 };
 

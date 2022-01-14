@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
-import { Edit2, UserX } from "react-feather";
-
 import { fetchSingleStudent } from "../store/currStudent";
 import { deleteStudent } from "../store/students";
+import { Edit2, UserX } from "react-feather";
 import SingleStudentEmptyState from "./SingleStudentEmptyState";
 import EnrollmentDetails from "./EnrollmentDetails";
 

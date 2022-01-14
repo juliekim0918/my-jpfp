@@ -71,10 +71,11 @@ class StudentForm extends Component {
     if (this.props.operation === "create") this.resetState();
     else this.props.fetchSingleStudent(this.props.match.params.studentId * 1);
   }
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       this.props.currStudent.id &&
       prevState.firstName !== this.props.currStudent.first_name &&
+      this.state.firstName === "" &&
       this.props.operation === "edit"
     ) {
       this.setEditState();
@@ -230,7 +231,7 @@ const mapDispatchToProps = (dispatch, { history }) => {
       dispatch(fetchCampuses());
     },
     createStudent: (student) => {
-      dispatch(createStudent(student));
+      dispatch(createStudent(student, history));
     },
     updateStudent: (id, updatedInfo) => {
       dispatch(updateStudent(id, updatedInfo, history));

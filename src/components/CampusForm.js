@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { createCampus, updateCampus } from "../store/campuses";
 import { fetchSingleCampus } from "../store/currCampus";
+import { fetchStudents } from "../store/students";
 import MultiselectMenu from "./MultiselectMenu";
 import { campusSchema } from "../validations/CampusFormValidation";
 
@@ -47,7 +48,6 @@ class CampusForm extends Component {
   };
 
   handleMultiselectChange = (students) => {
-    console.log(students);
     this.setState({
       selectedStudents: [...students],
     });
@@ -76,7 +76,7 @@ class CampusForm extends Component {
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleHitEnter, true);
-    console.log(this.state);
+    this.props.fetchStudents();
     if (!this.props.currCampus.id && this.props.operation === "edit") {
       this.props.fetchSingleCampus(this.props.match.params.campusId * 1);
     }
@@ -216,6 +216,9 @@ const mapDispatchToProps = (dispatch, { history }) => {
     },
     fetchSingleCampus: (id) => {
       dispatch(fetchSingleCampus(id));
+    },
+    fetchStudents: () => {
+      dispatch(fetchStudents());
     },
   };
 };

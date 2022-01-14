@@ -8,5 +8,9 @@ export const studentSchema = yup.object().shape({
     .string("Not a valid last name")
     .required("Last name is required"),
   email: yup.string().email("Not a valid email").required("Email is required"),
-  gpa: yup.number("Not a valid GPA").required("GPA is required"),
+  gpa: yup
+    .number("Not a valid GPA")
+    .min(0)
+    .max(4.0)
+    .required("GPA is required"),
 });

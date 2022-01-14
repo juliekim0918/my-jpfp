@@ -5,12 +5,12 @@ import { Menu, Transition } from "@headlessui/react";
 import includes from "lodash/includes";
 import { MoreVertical } from "react-feather";
 
-import { deleteStudent, updateStudent } from "../store/students";
+import { deleteStudent, unenrollStudent } from "../store/students";
 import { deleteCampus } from "../store/campuses";
 
 const SeeMoreMenu = (props) => {
   const { path } = useRouteMatch();
-  const { campusId, studentId, deleteStudent, deleteCampus, updateStudent } =
+  const { campusId, studentId, deleteStudent, deleteCampus, unenrollStudent } =
     props;
   return (
     <Menu className="absolute right-5 top-5 z-50" as="div">
@@ -71,7 +71,8 @@ const SeeMoreMenu = (props) => {
                   !includes(path, ":campusId") ? "hidden" : ""
                 } group flex rounded-md items-center w-full px-2 py-2 text-md`}
                 onClick={() => {
-                  updateStudent(studentId, { campusId: null }, campusId);
+                  console.log(studentId, campusId);
+                  unenrollStudent(studentId, campusId);
                 }}
               >
                 Unenroll
@@ -92,8 +93,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteCampus: (id) => {
       dispatch(deleteCampus(id));
     },
-    updateStudent: (id, updatedInfo, campusId) => {
-      dispatch(updateStudent(id, updatedInfo, null, campusId));
+    unenrollStudent: (studentId, campusId) => {
+      dispatch(unenrollStudent(studentId, campusId));
     },
   };
 };
