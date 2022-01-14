@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchSingleCampus } from "./currCampus";
+import { enrollStudents, fetchSingleCampus } from "./currCampus";
 
 const FETCH_CAMPUSES = "FETCH_CAMPUSES";
 
@@ -17,11 +17,24 @@ export const fetchCampuses = () => {
   };
 };
 
-export const updateCampus = (id, campus, history) => {
+export const updateCampus = (
+  campusId,
+  { name, address, description, selectedStudents },
+  history
+) => {
   return async (dispatch) => {
-    await axios.put(`/api/campuses/${id}`, campus);
-    dispatch(fetchSingleCampus(id));
-    history.push(`/campuses/${id}`);
+    if (!selectedStudents.length) {
+      await axios.put(`/api/campuses/${campusId}`, {
+        name,
+        address,
+        description,
+      });
+      dispatch(fetchSingleCampus(campusId));
+    } else {
+      dispatch(enrollStudents(campusId, selectedStudents));
+    }
+
+    history.push(`/campuses/${campusId}`);
   };
 };
 
@@ -32,14 +45,18 @@ export const deleteCampus = (id) => {
   };
 };
 
-export const createCampus = ({ name, address, description }) => {
+export const createCampus = (
+  { name, address, description, selectedStudents },
+  history
+) => {
   return async (dispatch) => {
-    await axios.post("/api/campuses", {
+    const { data: newCampus } = await axios.post("/api/campuses", {
       name,
       address,
       description,
     });
-    dispatch(fetchCampuses());
+    dispatch(enrollStudents(newCampus.id, selectedStudents));
+    history.push(`/campuses/${newCampus.id}`);
   };
 };
 

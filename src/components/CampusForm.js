@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { createCampus, updateCampus } from "../store/campuses";
 import { fetchSingleCampus } from "../store/currCampus";
+import MultiselectMenu from "./MultiselectMenu";
 
 class CampusForm extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class CampusForm extends Component {
       name: "",
       address: "",
       description: "",
+      selectedStudents: [],
     };
   }
   handleSubmit = (e) => {
@@ -30,6 +32,12 @@ class CampusForm extends Component {
     });
   };
 
+  handleMultiselectChange = (students) => {
+    this.setState({
+      selectedStudents: [...students],
+    });
+  };
+
   setEditState = () => {
     this.setState({
       name: this.props.currCampus.name,
@@ -43,6 +51,7 @@ class CampusForm extends Component {
       name: "",
       address: "",
       description: "",
+      selectedStudents: [],
     });
   };
 
@@ -71,9 +80,9 @@ class CampusForm extends Component {
   }
 
   render() {
-    const { name, address, description } = this.state;
+    const { name, address, description, selectedStudents } = this.state;
     const { handleSubmit, handleChange } = this;
-    const { operation } = this.props;
+    const { operation, students } = this.props;
     return (
       <div>
         <form
@@ -138,13 +147,11 @@ class CampusForm extends Component {
             >
               Students
             </label>
-            <select className="form-multiselect block w-full mt-1" multiple>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-              <option>Option 4</option>
-              <option>Option 5</option>
-            </select>
+            <MultiselectMenu
+              options={students}
+              handleSelectedStudents={this.handleMultiselectChange}
+              selectedStudents={selectedStudents}
+            />
           </div>
           <button
             type="submit"
@@ -158,14 +165,14 @@ class CampusForm extends Component {
   }
 }
 
-const mapStateToProps = ({ currCampus }) => {
-  return { currCampus };
+const mapStateToProps = ({ currCampus, students }) => {
+  return { currCampus, students };
 };
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     createCampus: (campus) => {
-      dispatch(createCampus(campus));
+      dispatch(createCampus(campus, history));
     },
     updateCampus: (id, campus) => {
       dispatch(updateCampus(id, campus, history));

@@ -16,6 +16,17 @@ export const fetchSingleCampus = (id) => {
   };
 };
 
+export const enrollStudents = (campusId, students) => {
+  return async (dispatch) => {
+    await Promise.all(
+      students.map((student) =>
+        axios.put(`/api/students/${student}`, { campusId })
+      )
+    );
+    dispatch(fetchSingleCampus(campusId));
+  };
+};
+
 export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_SINGLE_CAMPUS:

@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "formik": "^2.2.9",
     "pg": "^8.6.0",
+    "react-select": "^5.2.2",
     "sequelize": "^6.6.4",
     "volleyball": "^1.5.1"
   },

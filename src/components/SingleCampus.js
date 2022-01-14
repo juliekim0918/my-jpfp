@@ -70,7 +70,7 @@ const SingleCampus = (props) => {
               campusId={currCampus.id}
             />
           ) : (
-            <SingleCampusEmptyState />
+            <SingleCampusEmptyState url={url} />
           )}
         </div>
       </div>
