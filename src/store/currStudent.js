@@ -19,7 +19,6 @@ export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_SINGLE_STUDENT:
       return action.student;
-
     default:
       return state;
   }

@@ -71,7 +71,6 @@ const SeeMoreMenu = (props) => {
                   !includes(path, ":campusId") ? "hidden" : ""
                 } group flex rounded-md items-center w-full px-2 py-2 text-md`}
                 onClick={() => {
-                  console.log(studentId, campusId);
                   unenrollStudent(studentId, campusId);
                 }}
               >

@@ -8,6 +8,7 @@ import CampusList from "./CampusList";
 import SingleStudent from "./SingleStudent";
 import SingleCampus from "./SingleCampus";
 import Formview from "./Formview";
+import NotFound from "./NotFound";
 import { fetchCampuses } from "../store/campuses";
 
 const CREATE = "create";
@@ -98,6 +99,7 @@ const Listview = (props) => {
             path="/campuses/:campusId"
             render={(props) => <SingleCampus {...props} />}
           />
+          <Route render={(props) => <NotFound {...props} />} />
         </Switch>
       </div>
     </div>
