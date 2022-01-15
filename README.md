@@ -145,7 +145,7 @@ You can determine views and functionality from the requirements and wireframes s
 
 - [ X ] Create option for students to be ordered based on lastName on all-students view
 - [ X ] Create option for students to be ordered based on GPA on all-students view
-- [ ] Create option for campuses to be ordered based on number of enrolled students on all-campuses view
+- [ X ] Create option for campuses to be ordered based on number of enrolled students on all-campuses view
 
 #### Filtering
 

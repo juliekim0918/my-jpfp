@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import includes from "lodash/includes";
-import { Plus } from "react-feather";
+import { Plus, ArrowRight } from "react-feather";
 
 import StudentCard from "./StudentCard";
 import FilterToggle from "./FilterToggle";
@@ -56,6 +56,17 @@ const StudentList = ({ students, campusId }) => {
           );
         })}
       </div>
+      {path === "/" ? (
+        <div className="mt-6 md:mt-auto mb-10">
+          <Link
+            to="/students"
+            className="font-md w-full h-12 bg-white max-w-fit py-2 inline-flex items-center px-4 rounded-md drop-shadow-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold  "
+          >
+            See more
+            <ArrowRight className="-mr-1 ml-2 w-5" />
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -34,7 +34,7 @@ const Listview = (props) => {
               return (
                 <Fragment>
                   <StudentList {...props} students={students.slice(1, 5)} />
-                  <CampusList {...props} campuses={campuses.slice(1, 7)} />
+                  <CampusList {...props} />
                 </Fragment>
               );
             }}

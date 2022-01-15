@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import { Map, Plus } from "react-feather";
+import { Map, Plus, ArrowRight } from "react-feather";
 import { connect } from "react-redux";
 import includes from "lodash/includes";
 
@@ -35,9 +35,10 @@ class CampusList extends Component {
   }
 
   render() {
-    const { currCampuses } = this.state;
+    let { currCampuses } = this.state;
     const { match } = this.props;
     const { setCurrCampuses } = this;
+    match.path === "/" ? (currCampuses = currCampuses.slice(1, 7)) : null;
 
     return (
       <div>
@@ -73,7 +74,9 @@ class CampusList extends Component {
                 style={{ backgroundImage: `url(${campus.image})` }}
               ></div>
               <div className="flex flex-col relative p-10 gap-2">
-                <SeeMoreMenu campusId={campus.id} />
+                {match.path !== "/" ? (
+                  <SeeMoreMenu campusId={campus.id} />
+                ) : null}
                 <div className="text-3xl font-serif">{campus.name}</div>
                 <div className="font-sans text-lg text-gray-400 flex flex-row gap-2">
                   <Map />
@@ -83,6 +86,17 @@ class CampusList extends Component {
             </div>
           ))}
         </div>
+        {match.path === "/" ? (
+          <div className="mt-6 md:mt-auto">
+            <Link
+              to="/campuses"
+              className="font-md w-full h-12 bg-white max-w-fit py-2 inline-flex items-center px-4 rounded-md drop-shadow-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold  "
+            >
+              See more
+              <ArrowRight className="-mr-1 ml-2 w-5" />
+            </Link>
+          </div>
+        ) : null}
       </div>
     );
   }
