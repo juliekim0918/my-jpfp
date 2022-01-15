@@ -1,5 +1,6 @@
 import axios from "axios";
 import { enrollStudents, fetchSingleCampus } from "./currCampus";
+import { fetchStudents } from "./students";
 
 const FETCH_CAMPUSES = "FETCH_CAMPUSES";
 
@@ -34,6 +35,7 @@ export const updateCampus = (
       dispatch(enrollStudents(campusId, selectedStudents));
     }
 
+    dispatch(fetchStudents());
     history.push(`/campuses/${campusId}`);
   };
 };

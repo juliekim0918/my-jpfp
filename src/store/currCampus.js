@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchStudents } from "./students";
 
 const FETCH_SINGLE_CAMPUS = "FETCH_SINGLE_CAMPUS";
 
@@ -24,6 +25,7 @@ export const enrollStudents = (campusId, students) => {
       )
     );
     dispatch(fetchSingleCampus(campusId));
+    dispatch(fetchStudents());
   };
 };
 

@@ -41,6 +41,7 @@ export const updateStudent = (
       campusId,
     });
     dispatch(fetchSingleStudent(id));
+    dispatch(fetchStudents());
     history.push(`/students/${id}`);
   };
 };
@@ -49,6 +50,7 @@ export const unenrollStudent = (studentId, campusId) => {
   return async (dispatch) => {
     await axios.put(`/api/students/${studentId}`, { campusId: null });
     dispatch(fetchSingleCampus(campusId));
+    dispatch(fetchStudents());
   };
 };
 
