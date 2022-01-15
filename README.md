@@ -139,18 +139,18 @@ You can determine views and functionality from the requirements and wireframes s
 - [ X ] If a user attempts to access a page that doesn't exist (ex. `/potato`), a helpful "not found" message should be displayed
 - [ X ] If a user attempts to view a student/campus that doesn't exist, a helpful message should be displayed
 - [ ] Whenever a component needs to wait for data to load from the server, a "loading" message should be displayed until the data is available
-- [ ] Overall, the app is spectacularly styled and visually stunning
+- [ X ] Overall, the app is spectacularly styled and visually stunning
 
 #### Ordering
 
-- [ ] Create option for students to be ordered based on lastName on all-students view
-- [ ] Create option for students to be ordered based on GPA on all-students view
+- [ X ] Create option for students to be ordered based on lastName on all-students view
+- [ X ] Create option for students to be ordered based on GPA on all-students view
 - [ ] Create option for campuses to be ordered based on number of enrolled students on all-campuses view
 
 #### Filtering
 
-- [ ] Create a filter on all-students view to only show students who are not registered to a campus
-- [ ] Create a filter on the all-campuses view to only show campuses that do not have any registered students
+- [ X ] Create a filter on all-students view to only show students who are not registered to a campus
+- [ X ] Create a filter on the all-campuses view to only show campuses that do not have any registered students
 
 #### Seeding & Pagination
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { Map, Plus } from "react-feather";
+import includes from "lodash/includes";
 
 import SeeMoreMenu from "./SeeMoreMenu";
 import FilterToggle from "./FilterToggle";
@@ -11,6 +12,7 @@ const CampusList = ({ campuses }) => {
   useEffect(() => {
     setCurrCampuses(campuses);
   }, [campuses]);
+  const { path } = useRouteMatch();
 
   return (
     <div>
@@ -24,11 +26,20 @@ const CampusList = ({ campuses }) => {
           Add a campus
         </Link>
       </div>
-      <div className="flex p-5">
+      <div
+        className={`${
+          includes(path, "campuses") ? "block" : "hidden"
+        } flex justify-between py-5 border-b w-full border-dark-lava`}
+      >
         <FilterToggle
           setCurrCampuses={setCurrCampuses}
           entityToManipulate={CAMPUS}
         />
+        <select className="bg-eggshell min-w-fit drop-shadow-sm rounded-md border-0 text-md font-medium py-2 px-4 inline-flex items-center">
+          <option value="">Sort</option>
+          <option value="">By last name</option>
+          <option value="">By GPA</option>
+        </select>
       </div>
       <div className="flex flex-col gap-7 md:grid-cols-3 md:grid my-10">
         {currCampuses.map((campus) => (

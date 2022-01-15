@@ -50,7 +50,7 @@ const FilterToggle = ({
               : filterCampuses();
           }}
           className={`${
-            enabled ? "bg-gold" : "bg-gray-400"
+            enabled ? "bg-gold" : "bg-dark-lava"
           } p-2 relative rounded-full transition ease-in-out duration-200 transform h-8 w-16`}
         >
           <span
@@ -59,8 +59,10 @@ const FilterToggle = ({
             } left-1 top-1 absolute w-6 h-6 rounded-full bg-white inline-block transition ease-in-out duration-200`}
           ></span>
         </Switch>
-        <Switch.Label className="ml-4 font-semibold">
-          Show unenrolled
+        <Switch.Label className="ml-4 font-semibold text-sm w-36">
+          {entityToManipulate === "student"
+            ? "Show unenrolled students"
+            : "Show campuses with no enrollments"}
         </Switch.Label>
       </div>
     </Switch.Group>

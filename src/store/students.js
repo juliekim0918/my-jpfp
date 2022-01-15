@@ -13,9 +13,16 @@ const _fetchStudents = (students) => {
   };
 };
 
-export const fetchStudents = () => {
+export const fetchStudents = (order) => {
+  const params = order
+    ? {
+        params: {
+          order,
+        },
+      }
+    : "";
   return async (dispatch) => {
-    const { data: students } = await axios.get("/api/students");
+    const { data: students } = await axios.get("/api/students", params);
     dispatch(_fetchStudents(students));
   };
 };

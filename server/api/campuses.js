@@ -3,7 +3,12 @@ const { Student, Campus, db, seed } = require("../db");
 
 app.get("/", async (req, res, next) => {
   try {
-    const campuses = await Campus.findAll({ include: Student });
+    const order = !!Object.keys(req.query).length
+      ? req.query.order
+      : ["name", "DESC"];
+    const campuses = await Campus.findAll({
+      order: [order],
+    });
     res.send(campuses);
   } catch (error) {
     next(error);

@@ -5,6 +5,7 @@ import { Plus } from "react-feather";
 
 import StudentCard from "./StudentCard";
 import FilterToggle from "./FilterToggle";
+import SortBySelect from "./SortBySelect";
 const STUDENT = "student";
 
 const StudentList = ({ students, campusId }) => {
@@ -28,21 +29,22 @@ const StudentList = ({ students, campusId }) => {
               Add a student
             </Link>
           </div>
-          <div className="flex justify-between py-5 border-b w-full border-dark-lava">
-            <select className="bg-eggshell min-w-fit drop-shadow-md rounded-md border-0 text-md font-medium py-2 px-4 inline-flex items-center">
-              <option value="">Sort</option>
-              <option value="">By last name</option>
-              <option value="">By GPA</option>
-            </select>
+          <div
+            className={`${
+              includes(path, "students") ? "block" : "hidden"
+            } flex justify-between py-5 border-b w-full border-dark-lava`}
+          >
             <FilterToggle
               setCurrStudents={setCurrStudents}
               entityToManipulate={STUDENT}
             />
+            <SortBySelect />
           </div>
         </Fragment>
       ) : (
         ""
       )}
+
       <div className="flex flex-col gap-7 md:grid-cols-2 md:grid my-10">
         {currStudents.map((student) => {
           return (
