@@ -69,8 +69,9 @@ const SingleCampus = (props) => {
 
               {currCampus.students && currCampus.students.length ? (
                 <StudentList
-                  students={currCampus.students}
+                  currStudents={currCampus.students}
                   campusId={currCampus.id}
+                  {...props}
                 />
               ) : (
                 <SingleCampusEmptyState url={url} />

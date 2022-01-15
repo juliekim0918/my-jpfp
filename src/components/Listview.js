@@ -17,12 +17,6 @@ const STUDENT = "student";
 const CAMPUS = "campus";
 
 const Listview = (props) => {
-  const { fetchStudents, fetchCampuses, students, campuses } = props;
-  useEffect(() => {
-    fetchStudents();
-    fetchCampuses();
-  }, [students.length, campuses.length]);
-
   return (
     <div className="absolute top-[80%] md:top-2/3 left-0 right-0 w-11/12 mx-auto">
       <div className="p-5 md:p-16 rounded-lg max-w-screen-2xl mx-auto drop-shadow-lg bg-white z-0 mb-10">
@@ -33,7 +27,7 @@ const Listview = (props) => {
             render={(props) => {
               return (
                 <Fragment>
-                  <StudentList {...props} students={students.slice(1, 5)} />
+                  <StudentList {...props} />
                   <CampusList {...props} />
                 </Fragment>
               );
@@ -42,7 +36,7 @@ const Listview = (props) => {
           <Route
             path="/students"
             exact
-            render={(props) => <StudentList {...props} students={students} />}
+            render={(props) => <StudentList {...props} />}
           />
           <Route
             path="/campuses"
@@ -106,22 +100,4 @@ const Listview = (props) => {
   );
 };
 
-const mapStateToProps = ({ students, campuses }) => {
-  return {
-    students,
-    campuses,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchStudents: () => {
-      dispatch(fetchStudents());
-    },
-    fetchCampuses: () => {
-      dispatch(fetchCampuses());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Listview);
+export default Listview;

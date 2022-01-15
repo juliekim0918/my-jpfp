@@ -8,6 +8,7 @@ import SeeMoreMenu from "./SeeMoreMenu";
 import { fetchCampuses } from "../store/campuses";
 import FilterToggle from "./FilterToggle";
 import CampusSortBySelect from "./CampusSortBySelect";
+import Loader from "./Loader";
 const CAMPUS = "campus";
 
 class CampusList extends Component {
@@ -67,24 +68,31 @@ class CampusList extends Component {
           />
         </div>
         <div className="flex flex-col gap-7 md:grid-cols-3 mt-5 md:grid md:my-10">
-          {currCampuses.map((campus) => (
-            <div key={campus.id} className="rounded-lg drop-shadow-md bg-white">
+          {currCampuses[0] ? (
+            currCampuses.map((campus) => (
               <div
-                className="h-48 bg-cover rounded-md"
-                style={{ backgroundImage: `url(${campus.image})` }}
-              ></div>
-              <div className="flex flex-col relative p-10 gap-2">
-                {match.path !== "/" ? (
-                  <SeeMoreMenu campusId={campus.id} />
-                ) : null}
-                <div className="text-3xl font-serif">{campus.name}</div>
-                <div className="font-sans text-lg text-gray-400 flex flex-row gap-2">
-                  <Map />
-                  {campus.address}
+                key={campus.id}
+                className="rounded-lg drop-shadow-md bg-white"
+              >
+                <div
+                  className="h-48 bg-cover rounded-md"
+                  style={{ backgroundImage: `url(${campus.image})` }}
+                ></div>
+                <div className="flex flex-col relative p-10 gap-2">
+                  {match.path !== "/" ? (
+                    <SeeMoreMenu campusId={campus.id} />
+                  ) : null}
+                  <div className="text-3xl font-serif">{campus.name}</div>
+                  <div className="font-sans text-lg text-gray-400 flex flex-row gap-2">
+                    <Map />
+                    {campus.address}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <Loader />
+          )}
         </div>
         {match.path === "/" ? (
           <div className="mt-6 md:mt-auto">
