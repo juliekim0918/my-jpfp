@@ -67,6 +67,7 @@ class CampusList extends Component {
           } flex flex-col gap-y-5 md:flex-row justify-between py-5 border-b w-full border-dark-lava`}
         >
           <FilterToggle
+            currCampuses={currCampuses}
             setCurrCampuses={setCurrCampuses}
             entityToManipulate={CAMPUS}
           />
