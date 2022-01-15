@@ -6,9 +6,7 @@ import { fetchSingleStudent } from "../store/currStudent";
 import CampusForm from "./CampusForm";
 import StudentForm from "./StudentForm";
 
-const Formview = (props) => {
-  let { entityToManipulate, operation, history, match } = props;
-
+const Formview = ({ entityToManipulate, operation, history, match }) => {
   return (
     <div className="flex flex-col md:grid md:grid-cols-3 gap-10">
       <div className="rounded-md drop-shadow-sm h-fit">

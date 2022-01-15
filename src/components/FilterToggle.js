@@ -1,14 +1,40 @@
 import React, { useState, Fragment } from "react";
 import { Switch } from "@headlessui/react";
 import { connect } from "react-redux";
+import difference from "lodash/difference";
 
-const FilterToggle = ({ students, setCurrStudents }) => {
+const FilterToggle = ({
+  students,
+  setCurrStudents,
+  campuses,
+  setCurrCampuses,
+  entityToManipulate,
+}) => {
   const [enabled, setEnabled] = useState(false);
+
   function filterStudents() {
     if (!enabled) {
       setCurrStudents(students.filter((student) => !student.campusId));
     } else {
       setCurrStudents(students);
+    }
+  }
+
+  function filterCampuses() {
+    if (!enabled) {
+      const campusIdArr = campuses.map((c) => c.id);
+      const studentCampusIdArr = students.map((s) => s.campusId);
+      const campusesWithNoEnrollment = difference(
+        campusIdArr,
+        studentCampusIdArr
+      );
+      setCurrCampuses(
+        campuses.filter((campus) =>
+          campusesWithNoEnrollment.includes(campus.id)
+        )
+      );
+    } else {
+      setCurrCampuses(campuses);
     }
   }
 
@@ -19,7 +45,9 @@ const FilterToggle = ({ students, setCurrStudents }) => {
           checked={enabled}
           onChange={() => {
             setEnabled(!enabled);
-            filterStudents();
+            entityToManipulate === "student"
+              ? filterStudents()
+              : filterCampuses();
           }}
           className={`${
             enabled ? "bg-gold" : "bg-gray-400"
@@ -38,8 +66,8 @@ const FilterToggle = ({ students, setCurrStudents }) => {
     </Switch.Group>
   );
 };
-const mapStateToProps = ({ students, currCampus }) => ({
+const mapStateToProps = ({ students, campuses }) => ({
   students,
-  currCampus,
+  campuses,
 });
 export default connect(mapStateToProps)(FilterToggle);

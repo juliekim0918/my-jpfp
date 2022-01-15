@@ -8,10 +8,15 @@ import { MoreVertical } from "react-feather";
 import { deleteStudent, unenrollStudent } from "../store/students";
 import { deleteCampus } from "../store/campuses";
 
-const SeeMoreMenu = (props) => {
+const SeeMoreMenu = ({
+  campusId,
+  studentId,
+  deleteStudent,
+  deleteCampus,
+  unenrollStudent,
+}) => {
   const { path } = useRouteMatch();
-  const { campusId, studentId, deleteStudent, deleteCampus, unenrollStudent } =
-    props;
+
   return (
     <Menu className="absolute right-5 top-5 z-50" as="div">
       <Menu.Button>

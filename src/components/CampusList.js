@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Map, Plus } from "react-feather";
 
 import SeeMoreMenu from "./SeeMoreMenu";
+import FilterToggle from "./FilterToggle";
+const CAMPUS = "campus";
 
-const CampusList = (props) => {
-  const { campuses } = props;
+const CampusList = ({ campuses }) => {
+  const [currCampuses, setCurrCampuses] = useState([]);
+  useEffect(() => {
+    setCurrCampuses(campuses);
+  }, [campuses]);
 
   return (
     <div>
@@ -19,8 +24,14 @@ const CampusList = (props) => {
           Add a campus
         </Link>
       </div>
+      <div className="flex p-5">
+        <FilterToggle
+          setCurrCampuses={setCurrCampuses}
+          entityToManipulate={CAMPUS}
+        />
+      </div>
       <div className="flex flex-col gap-7 md:grid-cols-3 md:grid my-10">
-        {campuses.map((campus) => (
+        {currCampuses.map((campus) => (
           <div key={campus.id} className="rounded-lg drop-shadow-md bg-white">
             <div
               className="h-48 bg-cover rounded-md"

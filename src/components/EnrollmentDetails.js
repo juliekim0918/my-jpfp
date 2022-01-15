@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Map, ArrowRight } from "react-feather";
 
-const EnrollmentDetails = (props) => {
-  const { currStudent } = props;
+const EnrollmentDetails = ({ currStudent }) => {
   return (
     <div className="flex flex-col gap-5">
       <div

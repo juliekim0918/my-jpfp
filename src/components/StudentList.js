@@ -1,15 +1,13 @@
-import React, { Fragment, useReducer, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import includes from "lodash/includes";
-import { Plus, ChevronDown } from "react-feather";
+import { Plus } from "react-feather";
 
-import SeeMoreMenu from "./SeeMoreMenu";
-import FilterToggle from "./FilterToggle";
-import { connect } from "react-redux";
 import StudentCard from "./StudentCard";
+import FilterToggle from "./FilterToggle";
+const STUDENT = "student";
 
-const StudentList = (props) => {
-  let { students, campusId } = props;
+const StudentList = ({ students, campusId }) => {
   const [currStudents, setCurrStudents] = useState([]);
   useEffect(() => {
     setCurrStudents(students);
@@ -37,8 +35,8 @@ const StudentList = (props) => {
               <option value="">By GPA</option>
             </select>
             <FilterToggle
-              students={currStudents}
               setCurrStudents={setCurrStudents}
+              entityToManipulate={STUDENT}
             />
           </div>
         </Fragment>
