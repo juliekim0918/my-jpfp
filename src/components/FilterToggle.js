@@ -12,9 +12,6 @@ const FilterToggle = ({
   entityToManipulate,
 }) => {
   const [enabled, setEnabled] = useState(false);
-
-  console.log("what are current campuses", currCampuses);
-  console.log("what are campuses", campuses);
   useEffect(() => {
     if (!currCampuses && enabled) setEnabled(false);
     if (currCampuses && campuses.length === currCampuses.length)
