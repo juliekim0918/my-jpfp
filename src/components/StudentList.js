@@ -32,25 +32,27 @@ class StudentList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log("whats the this.props.currStudents", this.props.currStudents);
-    // console.log(this.props.students);
-    // console.log(prevProps.students);
-
     if (
       prevProps.students !== this.props.students &&
       !this.props.currStudents
     ) {
       this.setState({ currStudents: this.props.students });
     }
+    if (
+      this.props.currCampus &&
+      this.props.currCampus.students !== prevProps.currCampus.students
+    ) {
+      this.setState({ currStudents: this.props.currCampus.students });
+    }
   }
 
   render() {
     const { setCurrStudents } = this;
     let { currStudents } = this.state;
-    console.log(currStudents, "whatare currstudents");
     const {
       match: { path },
       campusId,
+      currCampus,
     } = this.props;
     path === "/" ? (currStudents = currStudents.slice(1, 5)) : null;
 
@@ -70,7 +72,7 @@ class StudentList extends Component {
             </div>
             <div
               className={`${
-                includes("students", "students") ? "block" : "hidden"
+                includes(path, "students") ? "block" : "hidden"
               } flex flex-col gap-y-5 md:flex-row justify-between py-5 border-b w-full border-dark-lava`}
             >
               <FilterToggle
@@ -115,9 +117,10 @@ class StudentList extends Component {
   }
 }
 
-const mapStateToProps = ({ students }) => {
+const mapStateToProps = ({ students, currCampus }) => {
   return {
     students,
+    currCampus,
   };
 };
 const mapDispatchToProps = (dispatch) => {

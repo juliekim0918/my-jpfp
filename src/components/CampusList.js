@@ -8,8 +8,9 @@ import SeeMoreMenu from "./SeeMoreMenu";
 import { fetchCampuses } from "../store/campuses";
 import FilterToggle from "./FilterToggle";
 import CampusSortBySelect from "./CampusSortBySelect";
-import Loader from "./Loader";
 const CAMPUS = "campus";
+import Loader from "./Loader";
+import { fetchStudents } from "../store/students";
 
 class CampusList extends Component {
   constructor() {
@@ -24,12 +25,20 @@ class CampusList extends Component {
 
   componentDidMount() {
     this.props.fetchCampuses();
+    this.props.fetchStudents();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.currCampuses !== this.props.campuses &&
       !this.state.currCampuses.length
+    ) {
+      this.setState({ currCampuses: this.props.campuses });
+    }
+
+    if (
+      this.props.campuses &&
+      this.props.campuses.length !== prevProps.campuses.length
     ) {
       this.setState({ currCampuses: this.props.campuses });
     }
@@ -40,7 +49,6 @@ class CampusList extends Component {
     const { match } = this.props;
     const { setCurrCampuses } = this;
     match.path === "/" ? (currCampuses = currCampuses.slice(1, 7)) : null;
-
     return (
       <div>
         <div className="flex justify-between pb-5 border-b border-dark-lava">
@@ -110,13 +118,17 @@ class CampusList extends Component {
   }
 }
 
-const mapStateToProps = ({ campuses }) => {
+const mapStateToProps = ({ campuses, students }) => {
   return {
     campuses,
+    students,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchStudents: () => {
+      dispatch(fetchStudents());
+    },
     fetchCampuses: () => {
       dispatch(fetchCampuses());
     },

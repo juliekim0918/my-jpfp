@@ -25,7 +25,6 @@ const StudentSortBySelect = ({ sortStudents }) => {
     <Listbox
       onChange={(e) => {
         setSortValue(e);
-        console.log(sortValue);
         _sortStudents(e.order);
       }}
       value={sortValue}

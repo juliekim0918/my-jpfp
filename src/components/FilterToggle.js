@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Switch } from "@headlessui/react";
 import { connect } from "react-redux";
 import difference from "lodash/difference";
@@ -11,6 +11,10 @@ const FilterToggle = ({
   entityToManipulate,
 }) => {
   const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    if (enabled) setEnabled(false);
+  }, [students, campuses]);
 
   function filterStudents() {
     if (!enabled) {
@@ -28,11 +32,10 @@ const FilterToggle = ({
         campusIdArr,
         studentCampusIdArr
       );
-      setCurrCampuses(
-        campuses.filter((campus) =>
-          campusesWithNoEnrollment.includes(campus.id)
-        )
+      const filtered = campuses.filter((campus) =>
+        campusesWithNoEnrollment.includes(campus.id)
       );
+      setCurrCampuses(filtered);
     } else {
       setCurrCampuses(campuses);
     }

@@ -12,7 +12,7 @@ const init = async () => {
           Listening on port ${PORT}
 
           http://localhost:${PORT}/
-
+          
         `)
     );
   } catch (error) {

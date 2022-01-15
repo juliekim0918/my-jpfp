@@ -4,7 +4,6 @@ const { Student, Campus, db, seed } = require("../db");
 
 app.get("/", async (req, res, next) => {
   try {
-    console.log(Object.keys(req.query));
     const order = !!Object.keys(req.query).length
       ? req.query.order
       : ["first_name", "DESC"];
