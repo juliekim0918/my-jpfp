@@ -47,7 +47,7 @@ const Listview = (props) => {
           <Route
             path="/campuses"
             exact
-            render={(props) => <CampusList {...props} campuses={campuses} />}
+            render={(props) => <CampusList {...props} />}
           />
           <Route
             path="/create/student"

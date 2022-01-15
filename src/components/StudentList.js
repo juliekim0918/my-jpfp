@@ -5,7 +5,7 @@ import { Plus } from "react-feather";
 
 import StudentCard from "./StudentCard";
 import FilterToggle from "./FilterToggle";
-import SortBySelect from "./SortBySelect";
+import StudentSortBySelect from "./StudentSortBySelect";
 const STUDENT = "student";
 
 const StudentList = ({ students, campusId }) => {
@@ -38,7 +38,7 @@ const StudentList = ({ students, campusId }) => {
               setCurrStudents={setCurrStudents}
               entityToManipulate={STUDENT}
             />
-            <SortBySelect />
+            <StudentSortBySelect />
           </div>
         </Fragment>
       ) : (

@@ -14,7 +14,7 @@ const studentSortOptions = [
   { id: 4, value: { order: ["last_name", "ASC"], formattedName: "Last Name" } },
 ];
 
-const SortBySelect = ({ sortStudents }) => {
+const StudentSortBySelect = ({ sortStudents }) => {
   const [sortValue, setSortValue] = useState({});
 
   function _sortStudents(order) {
@@ -87,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(SortBySelect);
+export default connect(null, mapDispatchToProps)(StudentSortBySelect);
