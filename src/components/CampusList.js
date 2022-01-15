@@ -47,14 +47,14 @@ class CampusList extends Component {
             to="/create/campus"
             className="text-md bg-gold text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold "
           >
-            <Plus className="-ml-1 mr-2 h-5 w-5 " aria-hidden="true" />
-            Add a campus
+            <Plus className="md:-ml-1 md:mr-2 h-5 w-5 " aria-hidden="true" />
+            <span className="md:block hidden">Add a campus</span>
           </Link>
         </div>
         <div
           className={`${
             includes(match.path, "campuses") ? "block" : "hidden"
-          } flex justify-between py-5 border-b w-full border-dark-lava`}
+          } flex flex-col gap-y-5 md:flex-row justify-between py-5 border-b w-full border-dark-lava`}
         >
           <FilterToggle
             setCurrCampuses={setCurrCampuses}
@@ -65,7 +65,7 @@ class CampusList extends Component {
             setCurrCampuses={setCurrCampuses}
           />
         </div>
-        <div className="flex flex-col gap-7 md:grid-cols-3 md:grid my-10">
+        <div className="flex flex-col gap-7 md:grid-cols-3 mt-5 md:grid md:my-10">
           {currCampuses.map((campus) => (
             <div key={campus.id} className="rounded-lg drop-shadow-md bg-white">
               <div

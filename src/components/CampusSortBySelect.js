@@ -15,11 +15,7 @@ const campusSortOptions = [
   },
 ];
 
-const CampusSortBySelect = ({
-  campuses,
-  campusesWithStudentCount,
-  setCurrCampuses,
-}) => {
+const CampusSortBySelect = ({ campusesWithStudentCount, setCurrCampuses }) => {
   const [sortValue, setSortValue] = useState({});
 
   function sortCampuses(operation) {
@@ -32,7 +28,6 @@ const CampusSortBySelect = ({
             return secondCampus.studentCount - firstCampus.studentCount;
           });
 
-    console.log("all sorted campuses", sortedCampuses);
     setCurrCampuses(sortedCampuses);
   }
 
@@ -68,7 +63,7 @@ const CampusSortBySelect = ({
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Listbox.Options className="z-20 absolute top-13 right-0 w-40 mt-1 py-2 bg-dark-lava text-white rounded-md drop-shadow-sm cursor-pointer">
+        <Listbox.Options className="z-20 absolute top-13 left-0 md:left-auto md:right-0 w-40 mt-1 py-2 bg-dark-lava text-white rounded-md drop-shadow-sm cursor-pointer">
           {campusSortOptions.map((option) => (
             <Listbox.Option key={option.id} value={option.value} as={Fragment}>
               {({ active }) => (

@@ -93,8 +93,8 @@ class StudentForm extends Component {
           onSubmit={handleSubmit}
           className="flex flex-col gap-3 max-w-2xl"
         >
-          <div className="flex justify-between gap-10">
-            <div className="flex flex-col w-1/2">
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:gap-10">
+            <div className="flex flex-col md:w-1/2">
               <label
                 htmlFor="firstName"
                 className="block text-lg font-bold text-gray-700"
@@ -117,7 +117,7 @@ class StudentForm extends Component {
                 ""
               )}
             </div>
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col md:w-1/2">
               <label
                 htmlFor="lastName"
                 className="block text-lg font-bold text-gray-700"

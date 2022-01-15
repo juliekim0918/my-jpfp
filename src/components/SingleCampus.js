@@ -26,10 +26,10 @@ const SingleCampus = (props) => {
               backgroundImage: `linear-gradient( rgba(255, 255, 255, 0),rgba(0,0,0, 0.7)), url(${currCampus.image})`,
             }}
           >
-            <div className="absolute text-5xl bottom-28 md:bottom-10 left-10 text-white font-serif w-2/3">
+            <div className="absolute text-5xl bottom-24 left-5 md:bottom-10 md:left-10 text-white font-serif w-2/3">
               {currCampus.name}
             </div>
-            <div className="flex gap-3 absolute bottom-10 left-10 md:left-auto md:right-10">
+            <div className="flex gap-3 absolute bottom-5 md:bottom-10 left-5 md:left-auto md:right-10">
               <RouterLink
                 to={`${url}/edit`}
                 type="button"
@@ -48,7 +48,7 @@ const SingleCampus = (props) => {
               </a>
             </div>
           </div>
-          <div className="p-10 flex gap-10 flex-col">
+          <div className="p-5 md:p-10 flex gap-10 flex-col">
             <div className="flex-inline">
               <div className="text-3xl font-serif pb-5 border-b border-dark-lava">
                 About

@@ -10,7 +10,7 @@ const EnrollmentDetails = ({ currStudent }) => {
         className="h-80 bg-cover rounded-md bg-center"
         style={{ backgroundImage: `url(${currStudent.campus.image})` }}
       ></div>
-      <div className="inline-flex flex-col gap-2 md:flex-row md:justify-between">
+      <div className="inline-flex flex-col gap-5 md:gap-2 md:flex-row md:justify-between">
         <div className="text-5xl font-serif">{currStudent.campus.name}</div>
         <Link
           to={`/campuses/${currStudent.campusId}`}

@@ -8,7 +8,7 @@ import StudentForm from "./StudentForm";
 
 const Formview = ({ entityToManipulate, operation, history, match }) => {
   return (
-    <div className="flex flex-col md:grid md:grid-cols-3 gap-10">
+    <div className="flex flex-col md:grid md:grid-cols-3 gap-5 md:gap-10">
       <div className="rounded-md drop-shadow-sm h-fit">
         <div className="text-3xl font-serif">
           {startCase(operation)} a {entityToManipulate}
@@ -17,7 +17,7 @@ const Formview = ({ entityToManipulate, operation, history, match }) => {
           Please fill out the necessary details for your {entityToManipulate}
         </div>
       </div>
-      <div className="rounded-md col-span-2 bg-eggshell drop-shadow-sm p-10">
+      <div className="rounded-md col-span-2 bg-eggshell drop-shadow-sm p-6 md:p-10">
         {entityToManipulate === "student" ? (
           <StudentForm history={history} operation={operation} match={match} />
         ) : (
