@@ -15,7 +15,17 @@ app.use("/api/students", require("./api/students"));
 app.use("/api/campuses", require("./api/campuses"));
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  try {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 404);
+  // this doesnt work
+  res.sendFile(path.join(__dirname, "../public/404.html"));
 });
 
 module.exports = app;

@@ -1,6 +1,6 @@
 const app = require("express").Router();
 const { Student, Campus } = require("../db");
-
+const path = require("path");
 app.get("/", async (req, res, next) => {
   try {
     const order = !!Object.keys(req.query).length
