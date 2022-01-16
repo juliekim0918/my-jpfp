@@ -99,7 +99,7 @@ class CampusList extends Component {
             setCurrCampuses={setCurrCampuses}
           />
         </div>
-        <div className="flex flex-col gap-7 md:grid-cols-3 mt-5 md:grid md:my-10">
+        <div className="flex flex-col gap-7 md:grid-cols-3 mt-5 md:grid my-10">
           {!currCampuses[0] ? <Loader /> : ""}
           {currCampuses.slice(startIndex, endIndex).map((campus) => (
             <div key={campus.id} className="rounded-lg drop-shadow-md bg-white">
