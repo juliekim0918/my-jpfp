@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import StudentList from "./StudentList";
@@ -14,6 +14,10 @@ const STUDENT = "student";
 const CAMPUS = "campus";
 
 const Listview = () => {
+  useEffect(() => {
+    document.title = "SchoolDash | Home";
+  }, []);
+
   return (
     <div className="absolute top-[80%] md:top-2/3 left-0 right-0 w-11/12 mx-auto">
       <div className="p-5 md:p-16 rounded-lg max-w-screen-2xl mx-auto drop-shadow-lg bg-white z-0 mb-10">
@@ -33,12 +37,16 @@ const Listview = () => {
           <Route
             path="/students"
             exact
-            render={(props) => <StudentList {...props} />}
+            render={(props) => (
+              <StudentList {...props} title="SchoolDash | Students" />
+            )}
           />
           <Route
             path="/campuses"
             exact
-            render={(props) => <CampusList {...props} />}
+            render={(props) => (
+              <CampusList {...props} title="SchoolDash | Campuses" />
+            )}
           />
           <Route
             path="/create/student"

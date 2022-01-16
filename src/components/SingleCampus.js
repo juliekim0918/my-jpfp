@@ -13,6 +13,7 @@ const SingleCampus = (props) => {
   const { url } = useRouteMatch();
   const id = props.match.params.campusId;
   useEffect(() => {
+    document.title = "SchoolDash | Campus";
     fetchSingleCampus(id);
   }, [currCampus.id]);
 

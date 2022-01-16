@@ -14,6 +14,7 @@ const SingleStudent = (props) => {
   const { url } = useRouteMatch();
   const id = props.match.params.studentId;
   useEffect(() => {
+    document.title = "SchoolDash | Student"
     fetchSingleStudent(id);
   }, [id]);
 

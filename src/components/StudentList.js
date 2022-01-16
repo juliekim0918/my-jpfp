@@ -29,6 +29,8 @@ class StudentList extends Component {
   paginate = (num) => this.setState({ currPage: num });
 
   componentDidMount() {
+    document.title = this.props.title || "SchoolDash | Home";
+
     if (!this.props.currStudents) {
       this.props.fetchStudents();
     } else {
