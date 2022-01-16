@@ -1,8 +1,8 @@
-import React, { Component, useState, Fragment } from "react";
-import { fetchStudents } from "../store/students";
+import React, { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { connect } from "react-redux";
 import { ChevronDown, ArrowDown, ArrowUp } from "react-feather";
+import { fetchStudents } from "../store/students";
 
 const campusSortOptions = [
   {

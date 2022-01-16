@@ -1,6 +1,5 @@
 import axios from "axios";
 import toNumber from "lodash/toNumber";
-import { fetchCampuses } from "./campuses";
 import { fetchSingleCampus } from "./currCampus";
 import { fetchSingleStudent } from "./currStudent";
 

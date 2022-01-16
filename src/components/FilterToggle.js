@@ -19,11 +19,9 @@ const FilterToggle = ({
   }, [students, campuses, currCampuses]);
 
   function filterStudents() {
-    if (!enabled) {
-      setCurrStudents(students.filter((student) => !student.campusId));
-    } else {
-      setCurrStudents(students);
-    }
+    !enabled
+      ? setCurrStudents(students.filter((student) => !student.campusId))
+      : setCurrStudents(students);
   }
 
   function filterCampuses() {

@@ -1,4 +1,4 @@
-import React, { Component, useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { fetchStudents } from "../store/students";
 import { Listbox, Transition } from "@headlessui/react";
 import { connect } from "react-redux";

@@ -1,6 +1,6 @@
 const PORT = process.env.PORT || 3000;
 const app = require("./app");
-const { Student, Campus, db, seed } = require("./db");
+const { db, seed } = require("./db");
 
 const init = async () => {
   try {
@@ -12,7 +12,7 @@ const init = async () => {
           Listening on port ${PORT}
 
           http://localhost:${PORT}/
-          
+
         `)
     );
   } catch (error) {

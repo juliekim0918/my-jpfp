@@ -5,7 +5,7 @@ import { createCampus, updateCampus } from "../store/campuses";
 import { fetchSingleCampus } from "../store/currCampus";
 import { fetchStudents } from "../store/students";
 import MultiselectMenu from "./MultiselectMenu";
-import { campusSchema } from "../validations/CampusFormValidation";
+import { campusSchema } from "./validations/CampusFormValidation";
 
 class CampusForm extends Component {
   constructor() {

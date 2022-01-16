@@ -1,27 +1,33 @@
-import React, { Component, useEffect, useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Map, Plus, ArrowRight } from "react-feather";
 import { connect } from "react-redux";
 import includes from "lodash/includes";
 
-import SeeMoreMenu from "./SeeMoreMenu";
 import { fetchCampuses } from "../store/campuses";
+import { fetchStudents } from "../store/students";
+import SeeMoreMenu from "./SeeMoreMenu";
+import Pagination from "./Pagination";
 import FilterToggle from "./FilterToggle";
 import CampusSortBySelect from "./CampusSortBySelect";
-const CAMPUS = "campus";
 import Loader from "./Loader";
-import { fetchStudents } from "../store/students";
+const CAMPUS = "campus";
 
 class CampusList extends Component {
   constructor() {
     super();
     this.state = {
       currCampuses: [],
+      currPage: 1,
+      cardsPerPage: 15,
     };
   }
+
   setCurrCampuses = (campuses) => {
     this.setState({ currCampuses: campuses });
   };
+
+  paginate = (num) => this.setState({ currPage: num });
 
   componentDidMount() {
     this.props.fetchCampuses();
@@ -29,26 +35,50 @@ class CampusList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    //initial load
     if (
       prevState.currCampuses !== this.props.campuses &&
       !this.state.currCampuses.length
     ) {
-      this.setState({ currCampuses: this.props.campuses });
+      this.setState({
+        currPage: 1,
+        currCampuses: this.props.campuses,
+      });
     }
 
+    // when deleting a college
     if (
       this.props.campuses &&
       this.props.campuses.length !== prevProps.campuses.length
     ) {
-      this.setState({ currCampuses: this.props.campuses });
+      this.setState({
+        currPage: 1,
+        currCampuses: this.props.campuses,
+      });
+    }
+
+    // when filter toggle is turned on/off
+    if (this.state.currCampuses.length !== prevState.currCampuses.length) {
+      this.setState({ currPage: 1 });
+    }
+
+    // when select sort is interacted with
+    if (
+      this.state.currCampuses.length === this.props.campuses.length &&
+      this.state.currCampuses.length === prevState.currCampuses.length
+    ) {
+      console.log("foruth logic ");
     }
   }
 
   render() {
-    let { currCampuses } = this.state;
+    let { currCampuses, cardsPerPage, currPage } = this.state;
     const { match } = this.props;
-    const { setCurrCampuses } = this;
+    const { setCurrCampuses, paginate } = this;
+    const startIndex = (currPage - 1) * cardsPerPage;
+    const endIndex = currPage * cardsPerPage;
     match.path === "/" ? (currCampuses = currCampuses.slice(1, 7)) : null;
+
     return (
       <div>
         <div className="flex justify-between pb-5 border-b border-dark-lava">
@@ -77,31 +107,25 @@ class CampusList extends Component {
           />
         </div>
         <div className="flex flex-col gap-7 md:grid-cols-3 mt-5 md:grid md:my-10">
-          {currCampuses[0] ? (
-            currCampuses.map((campus) => (
+          {!currCampuses[0] ? <Loader /> : ""}
+          {currCampuses.slice(startIndex, endIndex).map((campus) => (
+            <div key={campus.id} className="rounded-lg drop-shadow-md bg-white">
               <div
-                key={campus.id}
-                className="rounded-lg drop-shadow-md bg-white"
-              >
-                <div
-                  className="h-48 bg-cover rounded-md"
-                  style={{ backgroundImage: `url(${campus.image})` }}
-                ></div>
-                <div className="flex flex-col relative p-10 gap-2">
-                  {match.path !== "/" ? (
-                    <SeeMoreMenu campusId={campus.id} />
-                  ) : null}
-                  <div className="text-3xl font-serif">{campus.name}</div>
-                  <div className="font-sans text-lg text-gray-400 flex flex-row gap-2">
-                    <Map />
-                    {campus.address}
-                  </div>
+                className="h-48 bg-cover rounded-md"
+                style={{ backgroundImage: `url(${campus.image})` }}
+              ></div>
+              <div className="flex flex-col relative p-10 gap-2">
+                {match.path !== "/" ? (
+                  <SeeMoreMenu campusId={campus.id} />
+                ) : null}
+                <div className="text-3xl font-serif">{campus.name}</div>
+                <div className="font-sans text-lg text-gray-400 flex flex-row gap-2">
+                  <Map />
+                  {campus.address}
                 </div>
               </div>
-            ))
-          ) : (
-            <Loader />
-          )}
+            </div>
+          ))}
         </div>
         {match.path === "/" ? (
           <div className="mt-6 md:mt-auto">
@@ -113,7 +137,14 @@ class CampusList extends Component {
               <ArrowRight className="-mr-1 ml-2 w-5" />
             </Link>
           </div>
-        ) : null}
+        ) : (
+          <Pagination
+            entities={currCampuses}
+            cardsPerPage={cardsPerPage}
+            paginate={paginate}
+            currPage={currPage}
+          />
+        )}
       </div>
     );
   }

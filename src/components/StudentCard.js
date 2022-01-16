@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import SeeMoreMenu from "./SeeMoreMenu";
 import { useRouteMatch } from "react-router-dom";
 

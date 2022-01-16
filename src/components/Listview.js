@@ -1,22 +1,19 @@
-import React, { useEffect, Fragment } from "react";
-import { connect } from "react-redux";
+import React, { Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { fetchStudents } from "../store/students";
 import StudentList from "./StudentList";
 import CampusList from "./CampusList";
 import SingleStudent from "./SingleStudent";
 import SingleCampus from "./SingleCampus";
 import Formview from "./Formview";
 import NotFound from "./NotFound";
-import { fetchCampuses } from "../store/campuses";
 
 const CREATE = "create";
 const EDIT = "edit";
 const STUDENT = "student";
 const CAMPUS = "campus";
 
-const Listview = (props) => {
+const Listview = () => {
   return (
     <div className="absolute top-[80%] md:top-2/3 left-0 right-0 w-11/12 mx-auto">
       <div className="p-5 md:p-16 rounded-lg max-w-screen-2xl mx-auto drop-shadow-lg bg-white z-0 mb-10">
