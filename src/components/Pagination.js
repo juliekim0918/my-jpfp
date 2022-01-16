@@ -6,8 +6,9 @@ const Pagination = ({ entities, cardsPerPage, paginate, currPage }) => {
   for (let i = 1; i <= Math.ceil((entities.length / cardsPerPage) * 1); i++) {
     pageNumbers.push(i);
   }
+
   return (
-    <div className="col-span-3 rounded-md">
+    <div className="col-span-full rounded-md">
       <div className="flex-row flex gap-x-2 justify-center">
         <button
           onClick={() => paginate(currPage - 1)}

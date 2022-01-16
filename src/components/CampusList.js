@@ -61,14 +61,6 @@ class CampusList extends Component {
     if (this.state.currCampuses.length !== prevState.currCampuses.length) {
       this.setState({ currPage: 1 });
     }
-
-    // when select sort is interacted with
-    if (
-      this.state.currCampuses.length === this.props.campuses.length &&
-      this.state.currCampuses.length === prevState.currCampuses.length
-    ) {
-      console.log("foruth logic ");
-    }
   }
 
   render() {

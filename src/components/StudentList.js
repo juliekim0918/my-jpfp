@@ -9,6 +9,7 @@ import FilterToggle from "./FilterToggle";
 import StudentSortBySelect from "./StudentSortBySelect";
 import { fetchStudents } from "../store/students";
 import Loader from "./Loader";
+import Pagination from "./Pagination";
 const STUDENT = "student";
 
 class StudentList extends Component {
@@ -16,12 +17,16 @@ class StudentList extends Component {
     super();
     this.state = {
       currStudents: [],
+      currPage: 1,
+      cardsPerPage: 10,
     };
   }
 
   setCurrStudents = (students) => {
     this.setState({ currStudents: students });
   };
+
+  paginate = (num) => this.setState({ currPage: num });
 
   componentDidMount() {
     if (!this.props.currStudents) {
@@ -32,28 +37,40 @@ class StudentList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    //initial load
     if (
       prevProps.students !== this.props.students &&
       !this.props.currStudents
     ) {
-      this.setState({ currStudents: this.props.students });
+      this.setState({ currPage: 1, currStudents: this.props.students });
     }
+
+    // when deleting a student
     if (
       this.props.currCampus &&
       this.props.currCampus.students !== prevProps.currCampus.students
     ) {
-      this.setState({ currStudents: this.props.currCampus.students });
+      this.setState({
+        currPage: 1,
+        currStudents: this.props.currCampus.students,
+      });
+    }
+
+    // when filter toggle is interacted with
+    if (this.state.currStudents.length !== prevState.currStudents.length) {
+      this.setState({ currPage: 1 });
     }
   }
 
   render() {
-    const { setCurrStudents } = this;
-    let { currStudents } = this.state;
+    const { setCurrStudents, paginate } = this;
+    let { currStudents, currPage, cardsPerPage } = this.state;
     const {
       match: { path },
       campusId,
-      currCampus,
     } = this.props;
+    const startIndex = (currPage - 1) * cardsPerPage;
+    const endIndex = currPage * cardsPerPage;
     path === "/" ? (currStudents = currStudents.slice(1, 5)) : null;
 
     return (
@@ -85,32 +102,37 @@ class StudentList extends Component {
         ) : (
           ""
         )}
-
         <div className="flex flex-col gap-7 mt-5 md:grid-cols-2 md:grid md:my-10">
-          {currStudents[0] ? (
-            currStudents.map((student) => {
-              return (
-                <StudentCard
-                  key={student.id}
-                  student={student}
-                  campusId={campusId}
-                />
-              );
-            })
-          ) : (
-            <Loader />
-          )}
+          {!currStudents[0] ? <Loader /> : ""}
+          {currStudents.slice(startIndex, endIndex).map((student) => {
+            return (
+              <StudentCard
+                key={student.id}
+                student={student}
+                campusId={campusId}
+              />
+            );
+          })}
         </div>
-        {path === "/" ? (
-          <div className="mt-6 md:mt-auto mb-10">
-            <Link
-              to="/students"
-              className="font-md w-full h-12 bg-white max-w-fit py-2 inline-flex items-center px-4 rounded-md drop-shadow-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold  "
-            >
-              See more
-              <ArrowRight className="-mr-1 ml-2 w-5" />
-            </Link>
-          </div>
+
+        <div className="mt-6 md:mt-auto mb-10">
+          <Link
+            to="/students"
+            className={`${
+              path === "/" ? "block" : "hidden"
+            } font-md w-full h-12 bg-white max-w-fit py-2 inline-flex items-center px-4 rounded-md drop-shadow-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold  `}
+          >
+            See more
+            <ArrowRight className="-mr-1 ml-2 w-5" />
+          </Link>
+        </div>
+        {currStudents.length > 10 ? (
+          <Pagination
+            entities={currStudents}
+            paginate={paginate}
+            currPage={currPage}
+            cardsPerPage={cardsPerPage}
+          />
         ) : null}
       </div>
     );
