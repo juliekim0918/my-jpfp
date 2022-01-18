@@ -20,6 +20,7 @@ const Pagination = ({ entities, cardsPerPage, paginate, currPage }) => {
         </button>
         {pageNumbers.map((number) => {
           if (number === pageNumbers.length - 1) counter++;
+          console.log(counter, "counter");
           return (
             <Fragment key={number}>
               <button
@@ -27,19 +28,27 @@ const Pagination = ({ entities, cardsPerPage, paginate, currPage }) => {
                 className={`${
                   currPage === number ? "border-2 border-gold" : ""
                 } ${
-                  (number > currPage + 1 || number < currPage) &&
-                  number !== pageNumbers.length
-                    ? "hidden"
-                    : "block"
-                } md:hidden drop-shadow-sm py-2 px-4 rounded-md bg-eggshell`}
+                  number === currPage ||
+                  number === pageNumbers.length ||
+                  (currPage > 1 && number === currPage + 1) ||
+                  (currPage === 1 && number === currPage + 1) ||
+                  (currPage > pageNumbers.length - 4 &&
+                    number > pageNumbers.length - 4)
+                    ? "block"
+                    : "hidden"
+                }  md:hidden drop-shadow-sm py-2 px-4 rounded-md bg-eggshell`}
                 onClick={() => paginate(number)}
               >
                 {number}
               </button>
               <div
                 className={` ${
-                  number !== pageNumbers.length && counter > 0 ? "block" : ""
-                }hidden drop-shadow-sm md:hidden disabled:bg-stone-200 disabled:text-stone-400 py-2 px-4 rounded-md bg-eggshell focus:outline-none focus:ring-2 focus:ring-gold`}
+                  number !== pageNumbers.length &&
+                  counter > 0 &&
+                  currPage < pageNumbers.length - 3
+                    ? "block"
+                    : "hidden"
+                } drop-shadow-sm md:hidden disabled:bg-stone-200 disabled:text-stone-400 py-2 px-4 rounded-md bg-eggshell focus:outline-none focus:ring-2 focus:ring-gold`}
               >
                 ...
               </div>
