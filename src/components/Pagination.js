@@ -20,7 +20,6 @@ const Pagination = ({ entities, cardsPerPage, paginate, currPage }) => {
         </button>
         {pageNumbers.map((number) => {
           if (number === pageNumbers.length - 1) counter++;
-          console.log(counter, "counter");
           return (
             <Fragment key={number}>
               <button
