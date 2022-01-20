@@ -29,8 +29,9 @@ class StudentForm extends Component {
         );
       } else {
         this.props.createStudent(this.state);
-        this.props.history.push("/students");
       }
+
+      this.props.setPostOperation(true);
     } catch (error) {
       const errors = error.inner.reduce((acc, err) => {
         acc.push({ path: err.path, message: err.message });

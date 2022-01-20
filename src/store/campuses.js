@@ -36,7 +36,6 @@ export const updateCampus = (
     }
 
     dispatch(fetchStudents());
-    history.push(`/campuses/${campusId}`);
   };
 };
 
@@ -47,10 +46,12 @@ export const deleteCampus = (id) => {
   };
 };
 
-export const createCampus = (
-  { name, address, description, selectedStudents },
-  history
-) => {
+export const createCampus = ({
+  name,
+  address,
+  description,
+  selectedStudents,
+}) => {
   return async (dispatch) => {
     const { data: newCampus } = await axios.post("/api/campuses", {
       name,
@@ -58,7 +59,6 @@ export const createCampus = (
       description,
     });
     dispatch(enrollStudents(newCampus.id, selectedStudents));
-    history.push(`/campuses/${newCampus.id}`);
   };
 };
 

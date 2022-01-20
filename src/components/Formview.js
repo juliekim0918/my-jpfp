@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import startCase from "lodash/startCase";
 
 import { fetchSingleStudent } from "../store/currStudent";
 import CampusForm from "./CampusForm";
 import StudentForm from "./StudentForm";
+import SuccessfulFormBanner from "./SuccessfulFormBanner";
 
 const Formview = ({ entityToManipulate, operation, title, history, match }) => {
+  const [isPostOperation, setPostOperation] = useState(false);
   useEffect(() => {
     document.title =
       `SchoolDash | ${startCase(operation)} a ${startCase(
@@ -16,6 +18,14 @@ const Formview = ({ entityToManipulate, operation, title, history, match }) => {
 
   return (
     <div className="flex flex-col md:grid md:grid-cols-3 gap-5 md:gap-10">
+      {isPostOperation ? (
+        <SuccessfulFormBanner
+          history={history}
+          entityToManipulate={entityToManipulate}
+        />
+      ) : (
+        ""
+      )}
       <div className="rounded-md drop-shadow-sm h-fit">
         <div className="text-3xl font-serif">
           {startCase(operation)} a {entityToManipulate}
@@ -26,9 +36,19 @@ const Formview = ({ entityToManipulate, operation, title, history, match }) => {
       </div>
       <div className="rounded-md col-span-2 bg-eggshell drop-shadow-sm p-6 md:p-10">
         {entityToManipulate === "student" ? (
-          <StudentForm history={history} operation={operation} match={match} />
+          <StudentForm
+            history={history}
+            operation={operation}
+            match={match}
+            setPostOperation={setPostOperation}
+          />
         ) : (
-          <CampusForm history={history} operation={operation} match={match} />
+          <CampusForm
+            history={history}
+            operation={operation}
+            match={match}
+            setPostOperation={setPostOperation}
+          />
         )}
       </div>
     </div>

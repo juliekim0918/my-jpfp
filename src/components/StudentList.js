@@ -11,6 +11,7 @@ import { fetchStudents } from "../store/students";
 import Loader from "./Loader";
 import Pagination from "./Pagination";
 const STUDENT = "student";
+import SuccessfulDeleteBanner from "./SuccessfulDeleteBanner";
 
 class StudentList extends Component {
   constructor() {
@@ -79,6 +80,7 @@ class StudentList extends Component {
       <div>
         {includes(path, "student") || path === "/" ? (
           <Fragment>
+            <SuccessfulDeleteBanner />
             <div className="flex justify-between pb-5 border-b border-dark-lava">
               <div className="text-5xl font-serif ">Students</div>
               <Link

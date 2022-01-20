@@ -30,8 +30,8 @@ class CampusForm extends Component {
         );
       } else {
         this.props.createCampus(this.state);
-        this.props.history.push("/campuses");
       }
+      this.props.setPostOperation(true);
     } catch (error) {
       const errors = error.inner.reduce((acc, err) => {
         acc.push({ path: err.path, message: err.message });

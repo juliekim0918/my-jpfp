@@ -8,13 +8,15 @@ import { deleteStudent } from "../store/students";
 import SingleStudentEmptyState from "./SingleStudentEmptyState";
 import EnrollmentDetails from "./EnrollmentDetails";
 import NotFound from "./NotFound";
+import SuccessfulCreateBanner from "./SuccessfulFormBanner";
 
 const SingleStudent = (props) => {
-  const { fetchSingleStudent, deleteStudent, currStudent, history } = props;
+  const { fetchSingleStudent, deleteStudent, currStudent, history, students } =
+    props;
   const { url } = useRouteMatch();
   const id = props.match.params.studentId;
   useEffect(() => {
-    document.title = "SchoolDash | Student"
+    document.title = "SchoolDash | Student";
     fetchSingleStudent(id);
   }, [id]);
 
@@ -73,8 +75,8 @@ const SingleStudent = (props) => {
     </div>
   );
 };
-const mapStateToProps = ({ currStudent }) => {
-  return { currStudent };
+const mapStateToProps = ({ currStudent, students }) => {
+  return { currStudent, students };
 };
 
 const mapDispatchToProps = (dispatch) => {

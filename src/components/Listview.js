@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 
 import StudentList from "./StudentList";
 import CampusList from "./CampusList";
@@ -7,6 +7,7 @@ import SingleStudent from "./SingleStudent";
 import SingleCampus from "./SingleCampus";
 import Formview from "./Formview";
 import NotFound from "./NotFound";
+import MyModal from "./SuccessfulDeleteBanner";
 
 const CREATE = "create";
 const EDIT = "edit";
@@ -14,6 +15,7 @@ const STUDENT = "student";
 const CAMPUS = "campus";
 
 const Listview = () => {
+  let history = useLocation();
   useEffect(() => {
     document.title = "SchoolDash | Home";
   }, []);

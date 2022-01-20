@@ -7,6 +7,7 @@ import { fetchSingleCampus } from "../store/currCampus";
 import StudentList from "./StudentList";
 import SingleCampusEmptyState from "./SingleCampusEmptyState";
 import NotFound from "./NotFound";
+import SuccessfulCreateBanner from "./SuccessfulFormBanner";
 
 const SingleCampus = (props) => {
   const { currCampus, fetchSingleCampus, history } = props;

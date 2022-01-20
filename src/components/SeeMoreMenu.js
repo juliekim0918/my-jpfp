@@ -61,6 +61,11 @@ const SeeMoreMenu = ({
                   includes(path, "campus")
                     ? deleteCampus(campusId)
                     : deleteStudent(studentId);
+
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
                 }}
               >
                 Delete

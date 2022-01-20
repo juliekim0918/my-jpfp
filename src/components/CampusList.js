@@ -11,6 +11,7 @@ import Pagination from "./Pagination";
 import FilterToggle from "./FilterToggle";
 import CampusSortBySelect from "./CampusSortBySelect";
 import Loader from "./Loader";
+import SuccessfulDeleteBanner from "./SuccessfulDeleteBanner";
 const CAMPUS = "campus";
 
 class CampusList extends Component {
@@ -74,6 +75,7 @@ class CampusList extends Component {
 
     return (
       <div>
+        <SuccessfulDeleteBanner />
         <div className="flex justify-between pb-5 border-b border-dark-lava">
           <div className="text-5xl font-serif">Campuses</div>
           <Link

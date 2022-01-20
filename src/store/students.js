@@ -49,7 +49,7 @@ export const updateStudent = (
     });
     dispatch(fetchSingleStudent(id));
     dispatch(fetchStudents());
-    history.push(`/students/${id}`);
+    // history.push(`/students/${id}`);
   };
 };
 
@@ -74,8 +74,8 @@ export const createStudent = (
       gpa: toNumber(gpa),
       campusId: campusId ? toNumber(campusId) : campusId,
     });
+    dispatch(fetchSingleStudent(newStudent.id));
     dispatch(fetchStudents());
-    history.push(`/students/${newStudent.id}`);
   };
 };
 
